@@ -1,0 +1,11 @@
+lr=0.005
+l2_decay=0.01
+epochs=80
+batch_size=10000
+hist_period=5
+duti_training_lr=1000
+outer_loop_count=3000
+derived_lr=0.0002
+regular_rate=0.1
+repeat_sample_count_list=(6000 600 100 60)
+repeat_times_list=(1 10 60 100)

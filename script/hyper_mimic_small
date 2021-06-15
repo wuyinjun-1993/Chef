@@ -1,0 +1,5 @@
+lr=0.005
+l2_decay=0.01
+epochs=20
+batch_size=5000
+hist_period=20

@@ -1,0 +1,15 @@
+lr=0.005
+derived_epochs=400
+derived_bz=2000
+derived_l2=0
+l2_decay=0.0001
+epochs=200
+batch_size=100
+hist_period=5
+duti_training_lr=2
+outer_loop_count=3000
+derived_lr=0.4
+regular_rate=0.0001
+repeat_sample_count_list=(30000 1000)
+removed_total_count=30000
+repeat_times_list=(1 20)
