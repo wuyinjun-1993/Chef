@@ -1,0 +1,480 @@
+2021-02-17 17:05:05.510027: W tensorflow/stream_executor/platform/default/dso_loader.cc:59] Could not load dynamic library 'libcudart.so.10.1'; dlerror: libcudart.so.10.1: cannot open shared object file: No such file or directory
+2021-02-17 17:05:05.510068: I tensorflow/stream_executor/cuda/cudart_stub.cc:29] Ignore above cudart dlerror if you do not have a GPU set up on your machine.
+default git ignore dir:: /home/wuyinjun/ML_provenance_application/.gitignore
+Namespace(GPU=True, GPUID=0, GPU_measure=True, binary=False, bz=10000, class=0, dataset='retina', del_ratio=0.001, device=device(type='cuda', index=0), did=0, dir=None, epochs=100, f1=False, hist_period=5, hist_size=2, incremental=False, init=20, inner_epoch_count=50, jump=10, load_incremental=False, load_model=False, lr=2.0, model='Logistic_regression', norm='loss', o2u_epochs=2, out_epoch_count=10, output_dir='/data5/wuyinjun/', period=5, removed_count=50, restart=False, small_test=False, start=False, tlr=0.0005, wd=0.01)
+iter count:: 0
+False
+False
+Calc. s_test recursions: [=================================================] 1 / 1
+Averaging r-times: [=======================================================] 1 / 1
+influences::
+compute_hessian time:: 0.44069647789001465
+running time to calculate sample-wise gradients:: 38.66576027870178
+calculate_influence time:: 0.8482410907745361
+influence shape:: torch.Size([2, 31614])
+running time to calculate influence:: 40.355193853378296
+remaining samples for calculating influence:: 25241
+removed_id_size:: torch.Size([50])
+Y train difference:: tensor(50)
+existing labeled_count:: tensor(6373)
+samples with updated labels:: tensor([[ 1223],
+        [ 1832],
+        [ 1894],
+        [ 2282],
+        [ 2423],
+        [ 2625],
+        [ 2742],
+        [ 3301],
+        [ 3317],
+        [ 3587],
+        [ 3790],
+        [ 4056],
+        [ 4818],
+        [ 5076],
+        [ 5798],
+        [ 6166],
+        [ 7536],
+        [ 8159],
+        [ 8840],
+        [ 9363],
+        [ 9660],
+        [10221],
+        [10267],
+        [10376],
+        [11148],
+        [13392],
+        [15464],
+        [15530],
+        [15851],
+        [17000],
+        [17650],
+        [18206],
+        [18409],
+        [19125],
+        [19371],
+        [19954],
+        [20485],
+        [21791],
+        [21845],
+        [22780],
+        [23770],
+        [25209],
+        [25738],
+        [26152],
+        [28365],
+        [28381],
+        [28993],
+        [29852],
+        [30565],
+        [30914]]) tensor(50)
+sample count with changed labels:: tensor(50)
+running time to train models:: 19.8927800655365
+gpu utilization:: 35.3275
+gpu memory usage:: 1.87
+epoch:: 0
+valid dataset loss and accuracy:: tensor([0.5336], dtype=torch.float64) tensor(0.8761)
+test dataset loss and accuracy:: tensor([0.5357], dtype=torch.float64) tensor(0.8780)
+epoch:: 1
+valid dataset loss and accuracy:: tensor([0.5550], dtype=torch.float64) tensor(0.8508)
+test dataset loss and accuracy:: tensor([0.5569], dtype=torch.float64) tensor(0.8503)
+EarlyStopping counter: 1 out of 100
+epoch:: 2
+valid dataset loss and accuracy:: tensor([0.5631], dtype=torch.float64) tensor(0.8420)
+test dataset loss and accuracy:: tensor([0.5649], dtype=torch.float64) tensor(0.8397)
+EarlyStopping counter: 2 out of 100
+epoch:: 3
+valid dataset loss and accuracy:: tensor([0.5619], dtype=torch.float64) tensor(0.8454)
+test dataset loss and accuracy:: tensor([0.5638], dtype=torch.float64) tensor(0.8421)
+EarlyStopping counter: 3 out of 100
+epoch:: 4
+valid dataset loss and accuracy:: tensor([0.5594], dtype=torch.float64) tensor(0.8502)
+test dataset loss and accuracy:: tensor([0.5613], dtype=torch.float64) tensor(0.8475)
+EarlyStopping counter: 4 out of 100
+epoch:: 5
+valid dataset loss and accuracy:: tensor([0.5627], dtype=torch.float64) tensor(0.8465)
+test dataset loss and accuracy:: tensor([0.5647], dtype=torch.float64) tensor(0.8430)
+EarlyStopping counter: 5 out of 100
+epoch:: 6
+valid dataset loss and accuracy:: tensor([0.5680], dtype=torch.float64) tensor(0.8386)
+test dataset loss and accuracy:: tensor([0.5699], dtype=torch.float64) tensor(0.8356)
+EarlyStopping counter: 6 out of 100
+epoch:: 7
+valid dataset loss and accuracy:: tensor([0.5652], dtype=torch.float64) tensor(0.8425)
+test dataset loss and accuracy:: tensor([0.5672], dtype=torch.float64) tensor(0.8408)
+EarlyStopping counter: 7 out of 100
+epoch:: 8
+valid dataset loss and accuracy:: tensor([0.5663], dtype=torch.float64) tensor(0.8425)
+test dataset loss and accuracy:: tensor([0.5683], dtype=torch.float64) tensor(0.8398)
+EarlyStopping counter: 8 out of 100
+epoch:: 9
+valid dataset loss and accuracy:: tensor([0.5666], dtype=torch.float64) tensor(0.8437)
+test dataset loss and accuracy:: tensor([0.5686], dtype=torch.float64) tensor(0.8401)
+EarlyStopping counter: 9 out of 100
+epoch:: 10
+valid dataset loss and accuracy:: tensor([0.5652], dtype=torch.float64) tensor(0.8477)
+test dataset loss and accuracy:: tensor([0.5673], dtype=torch.float64) tensor(0.8432)
+EarlyStopping counter: 10 out of 100
+epoch:: 11
+valid dataset loss and accuracy:: tensor([0.5615], dtype=torch.float64) tensor(0.8539)
+test dataset loss and accuracy:: tensor([0.5637], dtype=torch.float64) tensor(0.8501)
+EarlyStopping counter: 11 out of 100
+epoch:: 12
+valid dataset loss and accuracy:: tensor([0.5588], dtype=torch.float64) tensor(0.8605)
+test dataset loss and accuracy:: tensor([0.5611], dtype=torch.float64) tensor(0.8550)
+EarlyStopping counter: 12 out of 100
+epoch:: 13
+valid dataset loss and accuracy:: tensor([0.5674], dtype=torch.float64) tensor(0.8462)
+test dataset loss and accuracy:: tensor([0.5696], dtype=torch.float64) tensor(0.8416)
+EarlyStopping counter: 13 out of 100
+epoch:: 14
+valid dataset loss and accuracy:: tensor([0.5655], dtype=torch.float64) tensor(0.8502)
+test dataset loss and accuracy:: tensor([0.5677], dtype=torch.float64) tensor(0.8451)
+EarlyStopping counter: 14 out of 100
+epoch:: 15
+valid dataset loss and accuracy:: tensor([0.5638], dtype=torch.float64) tensor(0.8536)
+test dataset loss and accuracy:: tensor([0.5661], dtype=torch.float64) tensor(0.8486)
+EarlyStopping counter: 15 out of 100
+epoch:: 16
+valid dataset loss and accuracy:: tensor([0.5615], dtype=torch.float64) tensor(0.8573)
+test dataset loss and accuracy:: tensor([0.5638], dtype=torch.float64) tensor(0.8530)
+EarlyStopping counter: 16 out of 100
+epoch:: 17
+valid dataset loss and accuracy:: tensor([0.5585], dtype=torch.float64) tensor(0.8647)
+test dataset loss and accuracy:: tensor([0.5609], dtype=torch.float64) tensor(0.8584)
+EarlyStopping counter: 17 out of 100
+epoch:: 18
+valid dataset loss and accuracy:: tensor([0.5650], dtype=torch.float64) tensor(0.8539)
+test dataset loss and accuracy:: tensor([0.5674], dtype=torch.float64) tensor(0.8478)
+EarlyStopping counter: 18 out of 100
+epoch:: 19
+valid dataset loss and accuracy:: tensor([0.5630], dtype=torch.float64) tensor(0.8602)
+test dataset loss and accuracy:: tensor([0.5654], dtype=torch.float64) tensor(0.8514)
+EarlyStopping counter: 19 out of 100
+epoch:: 20
+valid dataset loss and accuracy:: tensor([0.5605], dtype=torch.float64) tensor(0.8647)
+test dataset loss and accuracy:: tensor([0.5629], dtype=torch.float64) tensor(0.8566)
+EarlyStopping counter: 20 out of 100
+epoch:: 21
+valid dataset loss and accuracy:: tensor([0.5552], dtype=torch.float64) tensor(0.8739)
+test dataset loss and accuracy:: tensor([0.5577], dtype=torch.float64) tensor(0.8654)
+EarlyStopping counter: 21 out of 100
+epoch:: 22
+valid dataset loss and accuracy:: tensor([0.5598], dtype=torch.float64) tensor(0.8659)
+test dataset loss and accuracy:: tensor([0.5624], dtype=torch.float64) tensor(0.8581)
+EarlyStopping counter: 22 out of 100
+epoch:: 23
+valid dataset loss and accuracy:: tensor([0.5619], dtype=torch.float64) tensor(0.8636)
+test dataset loss and accuracy:: tensor([0.5644], dtype=torch.float64) tensor(0.8549)
+EarlyStopping counter: 23 out of 100
+epoch:: 24
+valid dataset loss and accuracy:: tensor([0.5645], dtype=torch.float64) tensor(0.8596)
+test dataset loss and accuracy:: tensor([0.5670], dtype=torch.float64) tensor(0.8505)
+EarlyStopping counter: 24 out of 100
+epoch:: 25
+valid dataset loss and accuracy:: tensor([0.5642], dtype=torch.float64) tensor(0.8608)
+test dataset loss and accuracy:: tensor([0.5668], dtype=torch.float64) tensor(0.8513)
+EarlyStopping counter: 25 out of 100
+epoch:: 26
+valid dataset loss and accuracy:: tensor([0.5623], dtype=torch.float64) tensor(0.8628)
+test dataset loss and accuracy:: tensor([0.5649], dtype=torch.float64) tensor(0.8545)
+EarlyStopping counter: 26 out of 100
+epoch:: 27
+valid dataset loss and accuracy:: tensor([0.5559], dtype=torch.float64) tensor(0.8736)
+test dataset loss and accuracy:: tensor([0.5585], dtype=torch.float64) tensor(0.8655)
+EarlyStopping counter: 27 out of 100
+epoch:: 28
+valid dataset loss and accuracy:: tensor([0.5571], dtype=torch.float64) tensor(0.8702)
+test dataset loss and accuracy:: tensor([0.5598], dtype=torch.float64) tensor(0.8636)
+EarlyStopping counter: 28 out of 100
+epoch:: 29
+valid dataset loss and accuracy:: tensor([0.5528], dtype=torch.float64) tensor(0.8796)
+test dataset loss and accuracy:: tensor([0.5555], dtype=torch.float64) tensor(0.8705)
+EarlyStopping counter: 29 out of 100
+epoch:: 30
+valid dataset loss and accuracy:: tensor([0.5585], dtype=torch.float64) tensor(0.8673)
+test dataset loss and accuracy:: tensor([0.5613], dtype=torch.float64) tensor(0.8612)
+EarlyStopping counter: 30 out of 100
+epoch:: 31
+valid dataset loss and accuracy:: tensor([0.5638], dtype=torch.float64) tensor(0.8588)
+test dataset loss and accuracy:: tensor([0.5665], dtype=torch.float64) tensor(0.8524)
+EarlyStopping counter: 31 out of 100
+epoch:: 32
+valid dataset loss and accuracy:: tensor([0.5604], dtype=torch.float64) tensor(0.8639)
+test dataset loss and accuracy:: tensor([0.5632], dtype=torch.float64) tensor(0.8581)
+EarlyStopping counter: 32 out of 100
+epoch:: 33
+valid dataset loss and accuracy:: tensor([0.5676], dtype=torch.float64) tensor(0.8539)
+test dataset loss and accuracy:: tensor([0.5703], dtype=torch.float64) tensor(0.8448)
+EarlyStopping counter: 33 out of 100
+epoch:: 34
+valid dataset loss and accuracy:: tensor([0.5595], dtype=torch.float64) tensor(0.8662)
+test dataset loss and accuracy:: tensor([0.5623], dtype=torch.float64) tensor(0.8599)
+EarlyStopping counter: 34 out of 100
+epoch:: 35
+valid dataset loss and accuracy:: tensor([0.5600], dtype=torch.float64) tensor(0.8656)
+test dataset loss and accuracy:: tensor([0.5628], dtype=torch.float64) tensor(0.8589)
+EarlyStopping counter: 35 out of 100
+epoch:: 36
+valid dataset loss and accuracy:: tensor([0.5578], dtype=torch.float64) tensor(0.8682)
+test dataset loss and accuracy:: tensor([0.5606], dtype=torch.float64) tensor(0.8628)
+EarlyStopping counter: 36 out of 100
+epoch:: 37
+valid dataset loss and accuracy:: tensor([0.5592], dtype=torch.float64) tensor(0.8647)
+test dataset loss and accuracy:: tensor([0.5620], dtype=torch.float64) tensor(0.8601)
+EarlyStopping counter: 37 out of 100
+epoch:: 38
+valid dataset loss and accuracy:: tensor([0.5611], dtype=torch.float64) tensor(0.8619)
+test dataset loss and accuracy:: tensor([0.5640], dtype=torch.float64) tensor(0.8559)
+EarlyStopping counter: 38 out of 100
+epoch:: 39
+valid dataset loss and accuracy:: tensor([0.5559], dtype=torch.float64) tensor(0.8707)
+test dataset loss and accuracy:: tensor([0.5588], dtype=torch.float64) tensor(0.8652)
+EarlyStopping counter: 39 out of 100
+epoch:: 40
+valid dataset loss and accuracy:: tensor([0.5571], dtype=torch.float64) tensor(0.8702)
+test dataset loss and accuracy:: tensor([0.5600], dtype=torch.float64) tensor(0.8630)
+EarlyStopping counter: 40 out of 100
+epoch:: 41
+valid dataset loss and accuracy:: tensor([0.5595], dtype=torch.float64) tensor(0.8667)
+test dataset loss and accuracy:: tensor([0.5625], dtype=torch.float64) tensor(0.8581)
+EarlyStopping counter: 41 out of 100
+epoch:: 42
+valid dataset loss and accuracy:: tensor([0.5561], dtype=torch.float64) tensor(0.8707)
+test dataset loss and accuracy:: tensor([0.5591], dtype=torch.float64) tensor(0.8645)
+EarlyStopping counter: 42 out of 100
+epoch:: 43
+valid dataset loss and accuracy:: tensor([0.5605], dtype=torch.float64) tensor(0.8639)
+test dataset loss and accuracy:: tensor([0.5634], dtype=torch.float64) tensor(0.8557)
+EarlyStopping counter: 43 out of 100
+epoch:: 44
+valid dataset loss and accuracy:: tensor([0.5583], dtype=torch.float64) tensor(0.8656)
+test dataset loss and accuracy:: tensor([0.5613], dtype=torch.float64) tensor(0.8601)
+EarlyStopping counter: 44 out of 100
+epoch:: 45
+valid dataset loss and accuracy:: tensor([0.5543], dtype=torch.float64) tensor(0.8761)
+test dataset loss and accuracy:: tensor([0.5573], dtype=torch.float64) tensor(0.8673)
+EarlyStopping counter: 45 out of 100
+epoch:: 46
+valid dataset loss and accuracy:: tensor([0.5549], dtype=torch.float64) tensor(0.8739)
+test dataset loss and accuracy:: tensor([0.5579], dtype=torch.float64) tensor(0.8658)
+EarlyStopping counter: 46 out of 100
+epoch:: 47
+valid dataset loss and accuracy:: tensor([0.5583], dtype=torch.float64) tensor(0.8673)
+test dataset loss and accuracy:: tensor([0.5613], dtype=torch.float64) tensor(0.8596)
+EarlyStopping counter: 47 out of 100
+epoch:: 48
+valid dataset loss and accuracy:: tensor([0.5623], dtype=torch.float64) tensor(0.8565)
+test dataset loss and accuracy:: tensor([0.5653], dtype=torch.float64) tensor(0.8518)
+EarlyStopping counter: 48 out of 100
+epoch:: 49
+valid dataset loss and accuracy:: tensor([0.5681], dtype=torch.float64) tensor(0.8477)
+test dataset loss and accuracy:: tensor([0.5711], dtype=torch.float64) tensor(0.8394)
+EarlyStopping counter: 49 out of 100
+epoch:: 50
+valid dataset loss and accuracy:: tensor([0.5605], dtype=torch.float64) tensor(0.8605)
+test dataset loss and accuracy:: tensor([0.5635], dtype=torch.float64) tensor(0.8550)
+EarlyStopping counter: 50 out of 100
+epoch:: 51
+valid dataset loss and accuracy:: tensor([0.5626], dtype=torch.float64) tensor(0.8565)
+test dataset loss and accuracy:: tensor([0.5657], dtype=torch.float64) tensor(0.8503)
+EarlyStopping counter: 51 out of 100
+epoch:: 52
+valid dataset loss and accuracy:: tensor([0.5596], dtype=torch.float64) tensor(0.8622)
+test dataset loss and accuracy:: tensor([0.5627], dtype=torch.float64) tensor(0.8555)
+EarlyStopping counter: 52 out of 100
+epoch:: 53
+valid dataset loss and accuracy:: tensor([0.5594], dtype=torch.float64) tensor(0.8622)
+test dataset loss and accuracy:: tensor([0.5625], dtype=torch.float64) tensor(0.8555)
+EarlyStopping counter: 53 out of 100
+epoch:: 54
+valid dataset loss and accuracy:: tensor([0.5660], dtype=torch.float64) tensor(0.8491)
+test dataset loss and accuracy:: tensor([0.5690], dtype=torch.float64) tensor(0.8421)
+EarlyStopping counter: 54 out of 100
+epoch:: 55
+valid dataset loss and accuracy:: tensor([0.5620], dtype=torch.float64) tensor(0.8585)
+test dataset loss and accuracy:: tensor([0.5651], dtype=torch.float64) tensor(0.8500)
+EarlyStopping counter: 55 out of 100
+epoch:: 56
+valid dataset loss and accuracy:: tensor([0.5580], dtype=torch.float64) tensor(0.8642)
+test dataset loss and accuracy:: tensor([0.5611], dtype=torch.float64) tensor(0.8572)
+EarlyStopping counter: 56 out of 100
+epoch:: 57
+valid dataset loss and accuracy:: tensor([0.5541], dtype=torch.float64) tensor(0.8687)
+test dataset loss and accuracy:: tensor([0.5573], dtype=torch.float64) tensor(0.8634)
+EarlyStopping counter: 57 out of 100
+epoch:: 58
+valid dataset loss and accuracy:: tensor([0.5635], dtype=torch.float64) tensor(0.8531)
+test dataset loss and accuracy:: tensor([0.5667], dtype=torch.float64) tensor(0.8455)
+EarlyStopping counter: 58 out of 100
+epoch:: 59
+valid dataset loss and accuracy:: tensor([0.5574], dtype=torch.float64) tensor(0.8639)
+test dataset loss and accuracy:: tensor([0.5606], dtype=torch.float64) tensor(0.8564)
+EarlyStopping counter: 59 out of 100
+epoch:: 60
+valid dataset loss and accuracy:: tensor([0.5557], dtype=torch.float64) tensor(0.8665)
+test dataset loss and accuracy:: tensor([0.5589], dtype=torch.float64) tensor(0.8588)
+EarlyStopping counter: 60 out of 100
+epoch:: 61
+valid dataset loss and accuracy:: tensor([0.5603], dtype=torch.float64) tensor(0.8579)
+test dataset loss and accuracy:: tensor([0.5634], dtype=torch.float64) tensor(0.8500)
+EarlyStopping counter: 61 out of 100
+epoch:: 62
+valid dataset loss and accuracy:: tensor([0.5572], dtype=torch.float64) tensor(0.8616)
+test dataset loss and accuracy:: tensor([0.5604], dtype=torch.float64) tensor(0.8553)
+EarlyStopping counter: 62 out of 100
+epoch:: 63
+valid dataset loss and accuracy:: tensor([0.5612], dtype=torch.float64) tensor(0.8545)
+test dataset loss and accuracy:: tensor([0.5644], dtype=torch.float64) tensor(0.8473)
+EarlyStopping counter: 63 out of 100
+epoch:: 64
+valid dataset loss and accuracy:: tensor([0.5614], dtype=torch.float64) tensor(0.8542)
+test dataset loss and accuracy:: tensor([0.5646], dtype=torch.float64) tensor(0.8463)
+EarlyStopping counter: 64 out of 100
+epoch:: 65
+valid dataset loss and accuracy:: tensor([0.5644], dtype=torch.float64) tensor(0.8462)
+test dataset loss and accuracy:: tensor([0.5676], dtype=torch.float64) tensor(0.8396)
+EarlyStopping counter: 65 out of 100
+epoch:: 66
+valid dataset loss and accuracy:: tensor([0.5593], dtype=torch.float64) tensor(0.8568)
+test dataset loss and accuracy:: tensor([0.5626], dtype=torch.float64) tensor(0.8495)
+EarlyStopping counter: 66 out of 100
+epoch:: 67
+valid dataset loss and accuracy:: tensor([0.5605], dtype=torch.float64) tensor(0.8522)
+test dataset loss and accuracy:: tensor([0.5637], dtype=torch.float64) tensor(0.8464)
+/home/wuyinjun/ML_provenance_application/iterative_detect/utils_iters.py:3056: UserWarning: Implicit dimension choice for log_softmax has been deprecated. Change the call to include dim=X as an argument.
+  model_out = -F.log_softmax(model(curr_x))
+/home/wuyinjun/ML_provenance_application/pytorch_influence_functions/influence_function.py:401: UserWarning: Implicit dimension choice for log_softmax has been deprecated. Change the call to include dim=X as an argument.
+  soft_y = torch.nn.functional.log_softmax(y)
+EarlyStopping counter: 67 out of 100
+epoch:: 68
+valid dataset loss and accuracy:: tensor([0.5619], dtype=torch.float64) tensor(0.8497)
+test dataset loss and accuracy:: tensor([0.5652], dtype=torch.float64) tensor(0.8432)
+EarlyStopping counter: 68 out of 100
+epoch:: 69
+valid dataset loss and accuracy:: tensor([0.5583], dtype=torch.float64) tensor(0.8565)
+test dataset loss and accuracy:: tensor([0.5616], dtype=torch.float64) tensor(0.8499)
+EarlyStopping counter: 69 out of 100
+epoch:: 70
+valid dataset loss and accuracy:: tensor([0.5577], dtype=torch.float64) tensor(0.8565)
+test dataset loss and accuracy:: tensor([0.5610], dtype=torch.float64) tensor(0.8506)
+EarlyStopping counter: 70 out of 100
+epoch:: 71
+valid dataset loss and accuracy:: tensor([0.5627], dtype=torch.float64) tensor(0.8460)
+test dataset loss and accuracy:: tensor([0.5660], dtype=torch.float64) tensor(0.8399)
+EarlyStopping counter: 71 out of 100
+epoch:: 72
+valid dataset loss and accuracy:: tensor([0.5606], dtype=torch.float64) tensor(0.8491)
+test dataset loss and accuracy:: tensor([0.5639], dtype=torch.float64) tensor(0.8436)
+EarlyStopping counter: 72 out of 100
+epoch:: 73
+valid dataset loss and accuracy:: tensor([0.5602], dtype=torch.float64) tensor(0.8494)
+test dataset loss and accuracy:: tensor([0.5636], dtype=torch.float64) tensor(0.8443)
+EarlyStopping counter: 73 out of 100
+epoch:: 74
+valid dataset loss and accuracy:: tensor([0.5552], dtype=torch.float64) tensor(0.8585)
+test dataset loss and accuracy:: tensor([0.5586], dtype=torch.float64) tensor(0.8536)
+EarlyStopping counter: 74 out of 100
+epoch:: 75
+valid dataset loss and accuracy:: tensor([0.5615], dtype=torch.float64) tensor(0.8457)
+test dataset loss and accuracy:: tensor([0.5648], dtype=torch.float64) tensor(0.8410)
+EarlyStopping counter: 75 out of 100
+epoch:: 76
+valid dataset loss and accuracy:: tensor([0.5566], dtype=torch.float64) tensor(0.8545)
+test dataset loss and accuracy:: tensor([0.5599], dtype=torch.float64) tensor(0.8501)
+EarlyStopping counter: 76 out of 100
+epoch:: 77
+valid dataset loss and accuracy:: tensor([0.5596], dtype=torch.float64) tensor(0.8485)
+test dataset loss and accuracy:: tensor([0.5630], dtype=torch.float64) tensor(0.8439)
+EarlyStopping counter: 77 out of 100
+epoch:: 78
+valid dataset loss and accuracy:: tensor([0.5600], dtype=torch.float64) tensor(0.8471)
+test dataset loss and accuracy:: tensor([0.5634], dtype=torch.float64) tensor(0.8427)
+EarlyStopping counter: 78 out of 100
+epoch:: 79
+valid dataset loss and accuracy:: tensor([0.5604], dtype=torch.float64) tensor(0.8460)
+test dataset loss and accuracy:: tensor([0.5638], dtype=torch.float64) tensor(0.8418)
+EarlyStopping counter: 79 out of 100
+epoch:: 80
+valid dataset loss and accuracy:: tensor([0.5579], dtype=torch.float64) tensor(0.8494)
+test dataset loss and accuracy:: tensor([0.5613], dtype=torch.float64) tensor(0.8464)
+EarlyStopping counter: 80 out of 100
+epoch:: 81
+valid dataset loss and accuracy:: tensor([0.5602], dtype=torch.float64) tensor(0.8454)
+test dataset loss and accuracy:: tensor([0.5636], dtype=torch.float64) tensor(0.8414)
+EarlyStopping counter: 81 out of 100
+epoch:: 82
+valid dataset loss and accuracy:: tensor([0.5585], dtype=torch.float64) tensor(0.8485)
+test dataset loss and accuracy:: tensor([0.5618], dtype=torch.float64) tensor(0.8445)
+EarlyStopping counter: 82 out of 100
+epoch:: 83
+valid dataset loss and accuracy:: tensor([0.5550], dtype=torch.float64) tensor(0.8542)
+test dataset loss and accuracy:: tensor([0.5585], dtype=torch.float64) tensor(0.8505)
+EarlyStopping counter: 83 out of 100
+epoch:: 84
+valid dataset loss and accuracy:: tensor([0.5640], dtype=torch.float64) tensor(0.8363)
+test dataset loss and accuracy:: tensor([0.5673], dtype=torch.float64) tensor(0.8316)
+EarlyStopping counter: 84 out of 100
+epoch:: 85
+valid dataset loss and accuracy:: tensor([0.5603], dtype=torch.float64) tensor(0.8440)
+test dataset loss and accuracy:: tensor([0.5636], dtype=torch.float64) tensor(0.8394)
+EarlyStopping counter: 85 out of 100
+epoch:: 86
+valid dataset loss and accuracy:: tensor([0.5633], dtype=torch.float64) tensor(0.8374)
+test dataset loss and accuracy:: tensor([0.5666], dtype=torch.float64) tensor(0.8325)
+EarlyStopping counter: 86 out of 100
+epoch:: 87
+valid dataset loss and accuracy:: tensor([0.5605], dtype=torch.float64) tensor(0.8434)
+test dataset loss and accuracy:: tensor([0.5639], dtype=torch.float64) tensor(0.8379)
+EarlyStopping counter: 87 out of 100
+epoch:: 88
+valid dataset loss and accuracy:: tensor([0.5573], dtype=torch.float64) tensor(0.8494)
+test dataset loss and accuracy:: tensor([0.5607], dtype=torch.float64) tensor(0.8442)
+EarlyStopping counter: 88 out of 100
+epoch:: 89
+valid dataset loss and accuracy:: tensor([0.5581], dtype=torch.float64) tensor(0.8477)
+test dataset loss and accuracy:: tensor([0.5615], dtype=torch.float64) tensor(0.8419)
+EarlyStopping counter: 89 out of 100
+epoch:: 90
+valid dataset loss and accuracy:: tensor([0.5617], dtype=torch.float64) tensor(0.8388)
+test dataset loss and accuracy:: tensor([0.5651], dtype=torch.float64) tensor(0.8338)
+EarlyStopping counter: 90 out of 100
+epoch:: 91
+valid dataset loss and accuracy:: tensor([0.5560], dtype=torch.float64) tensor(0.8508)
+test dataset loss and accuracy:: tensor([0.5594], dtype=torch.float64) tensor(0.8453)
+EarlyStopping counter: 91 out of 100
+epoch:: 92
+valid dataset loss and accuracy:: tensor([0.5576], dtype=torch.float64) tensor(0.8471)
+test dataset loss and accuracy:: tensor([0.5610], dtype=torch.float64) tensor(0.8413)
+EarlyStopping counter: 92 out of 100
+epoch:: 93
+valid dataset loss and accuracy:: tensor([0.5595], dtype=torch.float64) tensor(0.8431)
+test dataset loss and accuracy:: tensor([0.5629], dtype=torch.float64) tensor(0.8371)
+EarlyStopping counter: 93 out of 100
+epoch:: 94
+valid dataset loss and accuracy:: tensor([0.5580], dtype=torch.float64) tensor(0.8451)
+test dataset loss and accuracy:: tensor([0.5615], dtype=torch.float64) tensor(0.8396)
+EarlyStopping counter: 94 out of 100
+epoch:: 95
+valid dataset loss and accuracy:: tensor([0.5572], dtype=torch.float64) tensor(0.8462)
+test dataset loss and accuracy:: tensor([0.5606], dtype=torch.float64) tensor(0.8410)
+EarlyStopping counter: 95 out of 100
+epoch:: 96
+valid dataset loss and accuracy:: tensor([0.5598], dtype=torch.float64) tensor(0.8405)
+test dataset loss and accuracy:: tensor([0.5632], dtype=torch.float64) tensor(0.8349)
+EarlyStopping counter: 96 out of 100
+epoch:: 97
+valid dataset loss and accuracy:: tensor([0.5615], dtype=torch.float64) tensor(0.8371)
+test dataset loss and accuracy:: tensor([0.5649], dtype=torch.float64) tensor(0.8310)
+EarlyStopping counter: 97 out of 100
+epoch:: 98
+valid dataset loss and accuracy:: tensor([0.5592], dtype=torch.float64) tensor(0.8414)
+test dataset loss and accuracy:: tensor([0.5627], dtype=torch.float64) tensor(0.8353)
+EarlyStopping counter: 98 out of 100
+epoch:: 99
+valid dataset loss and accuracy:: tensor([0.5604], dtype=torch.float64) tensor(0.8383)
+test dataset loss and accuracy:: tensor([0.5638], dtype=torch.float64) tensor(0.8326)
+EarlyStopping counter: 99 out of 100
+validation dataset loss and accuracy:: tensor([0.5336], dtype=torch.float64) tensor(0.8761)
+test dataset loss and accuracy:: tensor([0.5357], dtype=torch.float64) tensor(0.8780)
+here
+model param updates:: tensor(0.0735, dtype=torch.float64)
