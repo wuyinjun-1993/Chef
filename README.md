@@ -23,10 +23,10 @@ To show how to use Chef for the label cleaning tasks, we use the Twitter sentime
 
 ### Pre-process data:
 
-'''
+```
 cd /path/to/dir/process_data/
 python pre_process_twitter --output_dir /path/to/dir/data/twitter/
-'''
+```
 
 To compare infl against other baseline methods, run the following command on twitter dataset:
 
