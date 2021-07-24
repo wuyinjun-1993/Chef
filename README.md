@@ -19,7 +19,7 @@ pip install -r requirements.txt
 ```
 
 ## Usage
-To show how to use Chef for the label cleaning tasks, we use the Twitter sentiment analysis dataset (twitter dataset for short hereafter) as the running example. The original version of the twitter dataset is available at [here](https://github.com/naimulhuq/Capstone/blob/master/Data/Airline-Full-Non-Ag-DFE-Sentiment%20(raw%20data).csv) which includes the non-aggregated labels provided by different human annotators. Suppose the project directory is '/path/to/dir', then we also provide a copy of the twitter dataset in the directory '/path/to/dir/data/twitter/'.
+To show how to use Chef for the label cleaning tasks, we use the **Twitter sentiment analysis dataset** (**Twitter dataset** for short hereafter) as the running example. The original version of the **Twitter dataset** is available at [here](https://github.com/naimulhuq/Capstone/blob/master/Data/Airline-Full-Non-Ag-DFE-Sentiment%20(raw%20data).csv) which includes the non-aggregated labels provided by different human annotators. Suppose the project directory is '/path/to/dir', then we also provide a copy of the **Twitter dataset** in the directory '/path/to/dir/data/twitter/'.
 
 ### Pre-process data:
 
