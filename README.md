@@ -52,11 +52,11 @@ $4=L2 regularization rate for model training (SGD), e.g., 0.002
 $5=dataset name, e.g., twitter
 $6=model name, e.g., Logistic_regression
 $7=data directory, e.g., ''
-$8=regularization coefficient for regularizing the training samples with probabilistic labels, e.g., 0.8, which is the value of &Lambda; in the paper.
-
-```
+$8=regularization coefficient for regularizing the training samples with probabilistic labels, e.g., 0.8, which is the value of &lambda; in the paper.
 
 For example, to train a model on the Twitter dataset, the above commands could be instantiated as follows:
+
+```
 cd /path/to/dir/iterative_detect/
 python3 full_pipeline_infl.py --bz 1000 --epochs 400 --tlr 0.005 --norm loss --wd 0.002 --dataset twitter --model Logistic_regression  --output_dir /home/wuyinjun/pg_data/twitter/ --start --restart --regular_rate 0.5 --suffix sl_initial_zero0  --no_prov
 ```
