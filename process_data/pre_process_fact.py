@@ -8,9 +8,9 @@ from argparse import ArgumentParser
 import os,sys
 import pandas as pd
 import numpy as np
-import gensim
-from gensim.models import Word2Vec
-import gensim.downloader as api
+# import gensim
+# from gensim.models import Word2Vec
+# import gensim.downloader as api
 import re
 import torch
 from snorkel.labeling.model import LabelModel
@@ -24,7 +24,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/
 # sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/models')
 
-from gensim.test.utils import datapath
+# from gensim.test.utils import datapath
 
 from torch import optim
 
@@ -52,18 +52,18 @@ gold_label_file = 'gold.public.csv'
 
 freebase_files = 'mid2name.tsv'
 
-def download_corpus():
-    # corpus = api.load('text8')
-    info = api.info()
-    print(json.dumps(info, indent=4))
-    for model_name, model_data in sorted(info['models'].items()):
-        print(
-            '%s (%d records): %s' % (
-                model_name,
-                model_data.get('num_records', -1),
-                model_data['description'][:40] + '...',
-            )
-        )
+# def download_corpus():
+#     # corpus = api.load('text8')
+#     info = api.info()
+#     print(json.dumps(info, indent=4))
+#     for model_name, model_data in sorted(info['models'].items()):
+#         print(
+#             '%s (%d records): %s' % (
+#                 model_name,
+#                 model_data.get('num_records', -1),
+#                 model_data['description'][:40] + '...',
+#             )
+#         )
     
 
 
@@ -1000,14 +1000,14 @@ def map_obj_sub_to_free_base(obj, subj, freebase_mappings):
     except:
         return None, None
     
-def convert_word_2_vec(content):
-    
-    model = api.load("glove-wiki-gigaword-50")
-
-    
-    # model = gensim.models.KeyedVectors.load_word2vec_format(datapath('word2vec_pre_kv_c'), binary=True)
-        
-    return model[content]
+# def convert_word_2_vec(content):
+#
+#     model = api.load("glove-wiki-gigaword-50")
+#
+#
+#     # model = gensim.models.KeyedVectors.load_word2vec_format(datapath('word2vec_pre_kv_c'), binary=True)
+#
+#     return model[content]
 
 
 def obtain_partitioned_tensor(tensor, min_len1 = 5, min_lenth2 = 15, origin_min_len1 = 10, origin_min_len2 = 30):
@@ -1021,7 +1021,7 @@ def obtain_partitioned_tensor(tensor, min_len1 = 5, min_lenth2 = 15, origin_min_
 
 if __name__ == '__main__':
     
-    download_corpus()
+    # download_corpus()
     
     parser = ArgumentParser()
     

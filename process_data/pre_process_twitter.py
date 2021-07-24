@@ -508,7 +508,7 @@ def read_twitter_csv(file_name, output_dir, training_count_with_gt_ratio = 0):
 
 if __name__ == '__main__':
     
-    download_corpus()
+    # download_corpus()
     
     parser = ArgumentParser()
     

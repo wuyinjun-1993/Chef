@@ -17,3 +17,7 @@ torch
 torchaudio
 torchvision
 typing-extensions
+torchtext
+transformers
+sentencepiece
+importlib_metadata
