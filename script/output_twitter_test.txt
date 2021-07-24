@@ -113,3 +113,15 @@ iteration 0
 print remove count::
 20, 20, 0
 python3 full_pipeline_o2u.py --derived_lr 0.001 --derived_epochs 50 --derived_bz 2000 --derived_l2 0 --bz 1000 --epochs 400 --tlr 0.005 --norm loss --wd 0.002 --dataset twitter --model Logistic_regression  --removed_count 20 --output_dir /home/wuyinjun/pg_data/twitter/  --hist_period 15 --resolve_conflict 0 --regular_rate 0.5 --continue_labeling --suffix o2u_initial_zero0   --no_prov > /home/wuyinjun/pg_data/twitter//output_resolve_conflict_0_remove_count_20_0_o2u_initial_zero0_0.txt 2>&1
+repeat times:: 1 10 2
+python3 full_pipeline_o2u.py --derived_lr 0.001 --bz 1000 --epochs 400 --tlr 0.005 --norm loss --wd 0.002 --dataset twitter --model Logistic_regression  --removed_count 50 --output_dir /home/wuyinjun/pg_data/twitter/ --start  --hist_period 15 --regular_rate 0.5 --suffix o2u_initial_zero0  --no_prov > /home/wuyinjun/pg_data/twitter//output_vary_remove_count_10_start_o2u_initial_zero0_0.txt 2>&1
+iteration 0
+print remove count::
+10, 20, 0
+python3 full_pipeline_o2u.py --derived_lr 0.001 --derived_epochs 50 --derived_bz 2000 --derived_l2 0 --bz 1000 --epochs 400 --tlr 0.005 --norm loss --wd 0.002 --dataset twitter --model Logistic_regression  --removed_count 10 --output_dir /home/wuyinjun/pg_data/twitter/  --hist_period 15 --resolve_conflict 0 --regular_rate 0.5 --continue_labeling --suffix o2u_initial_zero0   --no_prov > /home/wuyinjun/pg_data/twitter//output_resolve_conflict_0_remove_count_10_0_o2u_initial_zero0_0.txt 2>&1
+iteration 1
+print remove count::
+10, 20, 10
+python3 full_pipeline_o2u.py --derived_lr 0.001 --derived_epochs 50 --derived_bz 2000 --derived_l2 0 --bz 1000 --epochs 400 --tlr 0.005 --norm loss --wd 0.002 --dataset twitter --model Logistic_regression  --removed_count 10 --output_dir /home/wuyinjun/pg_data/twitter/  --hist_period 15 --resolve_conflict 0 --regular_rate 0.5 --continue_labeling --suffix o2u_initial_zero0   --no_prov > /home/wuyinjun/pg_data/twitter//output_resolve_conflict_0_remove_count_10_1_o2u_initial_zero0_0.txt 2>&1
+rm: cannot remove '/home/wuyinjun/pg_data/twitter//full_training_noisy_dataset_o2u_initial_zero0_v*': No such file or directory
+rm: cannot remove '/home/wuyinjun/pg_data/twitter//full_existing_labeled_id_tensor_o2u_initial_zero0_v*': No such file or directory
