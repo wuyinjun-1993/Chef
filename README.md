@@ -12,8 +12,9 @@ git clone https://github.com/thuwuyinjun/Chef.git
 
 
 
-and then run the following commands with PIP:
+and then run the following commands with PIP inside the project directory:
 ```
+cd Chef/
 pip install -r requirements.txt
 ```
 
