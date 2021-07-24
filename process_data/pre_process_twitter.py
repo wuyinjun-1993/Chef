@@ -524,11 +524,16 @@ if __name__ == '__main__':
     
     parser.add_argument('--output_dir', type = str, default = default_output_dir, help="output directory")
     
+    parser.add_argument('--input_data_dir', type = str, default = None, help="output directory")
+    
+    if args.input_data_dir is None:
+        args.input_data_dir = args.output_dir
+    
     args = parser.parse_args()
     
     # clean_sample_ids = torch.load(os.path.join(args.output_dir, 'clean_sample_ids'))
     
-    full_twitter_csv_file_name = os.path.join(args.output_dir, twitter_csv_file_names)
+    full_twitter_csv_file_name = os.path.join(args.input_data_dir, twitter_csv_file_names)
     
     # features_without_gt, annotated_labels_without_gt, prob_labels_without_gt, features_with_gt, labels_with_gt = read_twitter_csv(full_twitter_csv_file_name, default_output_dir)
     
