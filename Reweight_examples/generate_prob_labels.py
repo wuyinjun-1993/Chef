@@ -4,12 +4,12 @@ Created on Dec 20, 2020
 '''
 
 import torch
-from tqdm.notebook import tqdm
+# from tqdm.notebook import tqdm
 import torch.nn as nn
 import torch.optim as optim
 import numpy as np
 from torchvision import datasets,transforms
-from torch.utils.tensorboard import SummaryWriter
+# from torch.utils.tensorboard import SummaryWriter
 from torch.utils.data import DataLoader
 import time
 import copy

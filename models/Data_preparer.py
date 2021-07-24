@@ -14,7 +14,7 @@ import pickle
 
 from torch import nn, optim
 import torch
-import requests
+# import requests
 
 import bz2
 from bz2 import decompress
@@ -24,7 +24,7 @@ from torchvision import transforms, datasets, models
 from torch.utils.data import DataLoader
 from torch.optim import Adam
 
-import cv2
+# import cv2
 
 import csv
 from shutil import *
@@ -315,11 +315,11 @@ class Data_preparer:
         def __len__(self):
             return self.lenth
     
-        def scalRadius(self, img,scale):
-            x = img[int(img.shape[0]/2),:,:].sum(1)
-            r = (x>x.mean()/10).sum()/2
-            s = scale*1.0/r
-            return cv2.resize(img,None,fx=s,fy=s)
+        # def scalRadius(self, img,scale):
+        #     x = img[int(img.shape[0]/2),:,:].sum(1)
+        #     r = (x>x.mean()/10).sum()/2
+        #     s = scale*1.0/r
+        #     return cv2.resize(img,None,fx=s,fy=s)
     
         def __getitem__(self, idx):
 #             img_loc = os.path.join(self.main_dir, self.total_imgs[idx])
@@ -624,11 +624,11 @@ class Data_preparer:
         def __len__(self):
             return self.lenth
     
-        def scalRadius(self, img,scale):
-            x = img[int(img.shape[0]/2),:,:].sum(1)
-            r = (x>x.mean()/10).sum()/2
-            s = scale*1.0/r
-            return cv2.resize(img,None,fx=s,fy=s)
+        # def scalRadius(self, img,scale):
+        #     x = img[int(img.shape[0]/2),:,:].sum(1)
+        #     r = (x>x.mean()/10).sum()/2
+        #     s = scale*1.0/r
+        #     return cv2.resize(img,None,fx=s,fy=s)
     
         def __getitem__(self, idx):
 #             img_loc = os.path.join(self.main_dir, self.total_imgs[idx])
@@ -967,11 +967,11 @@ class Data_preparer:
         def __len__(self):
             return self.lenth
     
-        def scalRadius(self, img,scale):
-            x = img[int(img.shape[0]/2),:,:].sum(1)
-            r = (x>x.mean()/10).sum()/2
-            s = scale*1.0/r
-            return cv2.resize(img,None,fx=s,fy=s)
+        # def scalRadius(self, img,scale):
+        #     x = img[int(img.shape[0]/2),:,:].sum(1)
+        #     r = (x>x.mean()/10).sum()/2
+        #     s = scale*1.0/r
+        #     return cv2.resize(img,None,fx=s,fy=s)
     
         def __getitem__(self, idx):
 #             img_loc = os.path.join(self.main_dir, self.total_imgs[idx])
@@ -1378,11 +1378,11 @@ class Data_preparer:
         def __len__(self):
             return self.lenth
     
-        def scalRadius(self, img,scale):
-            x = img[int(img.shape[0]/2),:,:].sum(1)
-            r = (x>x.mean()/10).sum()/2
-            s = scale*1.0/r
-            return cv2.resize(img,None,fx=s,fy=s)
+        # def scalRadius(self, img,scale):
+        #     x = img[int(img.shape[0]/2),:,:].sum(1)
+        #     r = (x>x.mean()/10).sum()/2
+        #     s = scale*1.0/r
+        #     return cv2.resize(img,None,fx=s,fy=s)
     
         def __getitem__(self, idx):
 #             img_loc = os.path.join(self.main_dir, self.total_imgs[idx])
@@ -1512,11 +1512,11 @@ class Data_preparer:
         def __len__(self):
             return self.lenth
     
-        def scalRadius(self, img,scale):
-            x = img[int(img.shape[0]/2),:,:].sum(1)
-            r = (x>x.mean()/10).sum()/2
-            s = scale*1.0/r
-            return cv2.resize(img,None,fx=s,fy=s)
+        # def scalRadius(self, img,scale):
+        #     x = img[int(img.shape[0]/2),:,:].sum(1)
+        #     r = (x>x.mean()/10).sum()/2
+        #     s = scale*1.0/r
+        #     return cv2.resize(img,None,fx=s,fy=s)
     
         def __getitem__(self, idx):
 #             img_loc = os.path.join(self.main_dir, self.total_imgs[idx])
@@ -2677,346 +2677,14 @@ class Data_preparer:
     
     
     
-    def prepare_rcv1(self, git_ignore_folder):
-        
-        
-        
-        if not os.path.exists(git_ignore_folder):
-            os.makedirs(git_ignore_folder)
-            
-        if not os.path.exists(git_ignore_folder + '/rcv1'):
-            os.makedirs(git_ignore_folder + '/rcv1')
-        
-        
-        if not os.path.exists(git_ignore_folder + '/rcv1/rcv1_train.binary'):
-            print('start downloading rcv1 training dataset')
-            url = 'https://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/binary/rcv1_train.binary.bz2'
-            r = requests.get(url, allow_redirects=True)
-            curr_file_name = git_ignore_folder + 'rcv1/rcv1_train.binary'
-            open(curr_file_name + '.bz2', 'wb').write(r.content)
-            print('end downloading rcv1 training dataset')
-            
-            print('start uncompressing rcv1 training dataset')
-            zipfile = bz2.BZ2File(curr_file_name + '.bz2') # open the file
-            data = zipfile.read() # get the decompressed data
-#             newfilepath = filepath[:-4] # assuming the filepath ends with .bz2
-            open(curr_file_name, 'wb').write(data) # write a uncompressed file
-                        
-            print('end uncompressing rcv1 training dataset')
-            
-            
-        
-        if not os.path.exists(git_ignore_folder + '/rcv1/rcv1_test.binary'):
-            print('start downloading rcv1 test dataset')
-            url = 'https://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/binary/rcv1_test.binary.bz2'
-            r = requests.get(url, allow_redirects=True)
-            curr_file_name = git_ignore_folder + 'rcv1/rcv1_test.binary'
-            open(curr_file_name + '.bz2', 'wb').write(r.content)
-            print('end downloading rcv1 test dataset')
-            
-            print('start uncompressing rcv1 test dataset')
-            zipfile = bz2.BZ2File(curr_file_name + '.bz2') # open the file
-            data = zipfile.read() # get the decompressed data
-#             newfilepath = filepath[:-4] # assuming the filepath ends with .bz2
-            open(curr_file_name, 'wb').write(data) # write a uncompressed file
-            print('end uncompressing rcv1 test dataset')
-#         configs = load_config_data(config_file)
-    
-#     print(configs)
-#         git_ignore_folder = configs['git_ignore_folder']
-        
-#         directory_name = configs['directory']
-        
-        X_train, y_train = load_svmlight_file(git_ignore_folder + "/rcv1/rcv1_train.binary")
-        
-#         X_test, y_test = load_svmlight_file(git_ignore_folder + "/rcv1/rcv1_test.binary")
-        
-        
-        train_X = torch.from_numpy(X_train.todense()).type(torch.DoubleTensor)
-        
-        train_Y = torch.from_numpy(y_train).type(torch.DoubleTensor).view(y_train.shape[0], -1)
-        
-        train_Y = (train_Y + 1)/2
-        
-#         test_X = torch.from_numpy(X_test.todense()).type(torch.DoubleTensor)
-#         
-#         test_Y = torch.from_numpy(y_test).type(torch.DoubleTensor).view(y_test.shape[0], -1)
-#         
-#         test_Y = (test_Y + 1)/2        
-        
-        
-#         train_X, train_Y, test_X, test_Y = load_data_multi_classes_rcv1()
-        
-#         train_X, train_Y = load_data_multi_classes_single(True, directory_name + "rcv1_test.multiclass")
-#         
-#         test_X, test_Y = load_data_multi_classes_single(True, directory_name + "rcv1_train.multiclass")
-#         
-# #         train_X, train_Y, test_X, test_Y = load_data_multi_classes(True, "../../../data/covtype")
-#         
-#         
-#         train_X = extended_by_constant_terms(train_X, False)
-#         
-#         test_X = extended_by_constant_terms(test_X, False)
-        
-#         torch.save(train_X, git_ignore_folder + 'noise_X')
-#         
-#         torch.save(train_Y, git_ignore_folder + 'noise_Y')
-#         train_data = MNIST(git_ignore_folder + '/mnist',
-#                    download=True,
-#                    transform=transforms.Compose([
-# #                         transforms.Resize((32, 32)),
-#                        transforms.ToTensor()]))
-#         
-#         test_data = MNIST(git_ignore_folder + '/mnist',
-#                       train=False,
-#                       download=True,
-#                       transform=transforms.Compose([
-# #                         transforms.Resize((32, 32)),
-#                           transforms.ToTensor()]))
-        
-        return train_X, train_Y.type(torch.LongTensor), train_X, train_Y.type(torch.LongTensor)
         
     
-    
-    def get_hyperparameters_rcv1(self, parameters, init_lr, regularization_rate):
-    
-        criterion = nn.NLLLoss()
-        optimizer = optim.SGD(parameters, lr=init_lr, weight_decay = regularization_rate)
-#         lr_scheduler = torch.optim.lr_scheduler.ExponentialLR(optimizer, gamma = 0.9)
-        
-#         regularization_rate = 0.1
-        
-        return criterion, optimizer
-    
-    def get_num_class_rcv1(self):
-        return 2
+       
     
     
+       
     
-    # def prepare_FashionMNIST(self):
-        # train_data = FashionMNIST(git_ignore_folder + '/fashion_mnist',
-                   # download=True,
-                   # transform=transforms.Compose([
-# #                         transforms.Resize((32, 32)),
-                       # transforms.ToTensor()]))
-                       #
-        # test_data = FashionMNIST(git_ignore_folder + '/fashion_mnist',
-                      # train=False,
-                      # download=True,
-                      # transform=transforms.Compose([
-# #                         transforms.Resize((32, 32)),
-                          # transforms.ToTensor()]))
-                          #
-        # return train_data, test_data
-        #
-    
-    
-    def get_hyperparameters_FashionMNIST(self, parameters, init_lr, regularization_rate):
-    
-        criterion = nn.CrossEntropyLoss()
-        optimizer = optim.SGD(parameters, lr=init_lr, weight_decay = regularization_rate)
-        lr_scheduler = torch.optim.lr_scheduler.ExponentialLR(optimizer, gamma = 0.9)
-        
-#         regularization_rate = 0.1
-        
-        return criterion, optimizer, lr_scheduler
-    
-    
-    # def prepare_FashionMNIST2(self):
-        # train_data = FashionMNIST(git_ignore_folder + '/fashion_mnist',
-                   # download=True,
-                   # transform=transforms.Compose([
-# #                         transforms.Resize((32, 32)),
-                       # transforms.ToTensor()]))
-                       #
-        # test_data = FashionMNIST(git_ignore_folder + '/fashion_mnist',
-                      # train=False,
-                      # download=True,
-                      # transform=transforms.Compose([
-# #                         transforms.Resize((32, 32)),
-                          # transforms.ToTensor()]))
-                          #
-        # return train_data, test_data
-        #
-    
-    
-    def get_hyperparameters_FashionMNIST2(self, parameters, init_lr, regularization_rate):
-    
-        criterion = nn.MSELoss()
-        optimizer = optim.SGD(parameters, lr=init_lr, weight_decay = regularization_rate)
-        lr_scheduler = torch.optim.lr_scheduler.ExponentialLR(optimizer, gamma = 0.9)
-        
-#         regularization_rate = 0.1
-        
-        return criterion, optimizer, lr_scheduler
-    
-    
-    def transform_cifar10(self, data, transform, transform_num):
-#         data_array = np.array(data)
-        data_array = data
-        
-        transformed_tensor = []
-        
-        for i in range(data_array.shape[0]):
-            print('data::', i)
-            curr_array = transforms.ToPILImage()(data_array[i])
-            
-            for k in range(transform_num):
-                curr_new_array = transform.transforms[k](curr_array)
-                
-                del curr_array
-                
-                curr_array = curr_new_array
-            
-            transformed_tensor.append(curr_array)
-            
-        return torch.stack(transformed_tensor, dim = 0)
-    
-    
-    def prepare_cifar10(self, git_ignore_folder):
-        
-        
-#         configs = load_config_data(config_file)
-#     
-# #     print(configs)
-# #         git_ignore_folder = configs['git_ignore_folder']
-# #         
-# #         directory_name = configs['directory']
-#         
-#         X_train, y_train = load_svmlight_file(directory_name + "cifar10")
-#         
-#         X_test, y_test = load_svmlight_file(directory_name + "cifar10.t")
-#         
-#         
-#         train_X = torch.from_numpy(X_train.todense()).type(torch.DoubleTensor)/255
-#         
-#         train_Y = torch.from_numpy(y_train).type(torch.LongTensor).view(y_train.shape[0], -1)
-#         
-#         test_X = torch.from_numpy(X_test.todense()).type(torch.DoubleTensor)/255
-#         
-#         test_Y = torch.from_numpy(y_test).type(torch.LongTensor).view(y_test.shape[0], -1)
-        
-        
-        
-#         transform = transforms.Compose([transforms.RandomCrop(32, padding=4), transforms.RandomHorizontalFlip(), transforms.ToTensor(),transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010))])
-#         transform = transforms.Compose([transforms.RandomResizedCrop(224), transforms.RandomHorizontalFlip(), transforms.ToTensor(),transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
 
-        transform_train = transforms.Compose([
-            transforms.RandomCrop(32, padding=4),
-            transforms.RandomHorizontalFlip(),
-            transforms.ToTensor(),
-            transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010)),
-        ])
-        
-        transform_test = transforms.Compose([
-            transforms.ToTensor(),
-            transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010)),
-        ])
-
-#         transform = transforms.Compose(
-#             [transforms.ToTensor(),
-#              transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
-
-        cifar_dir = git_ignore_folder + '/cifar10'
-
-#         if os.path.exists(os.path.join(cifar_dir, 'train_X')):
-#             train_X = torch.load(os.path.join(cifar_dir, 'train_X')).type(torch.DoubleTensor)
-#             
-#             test_X = torch.load(os.path.join(cifar_dir, 'test_X')).type(torch.DoubleTensor)
-# 
-#             train_Y = torch.load(os.path.join(cifar_dir, 'train_Y'))
-#             
-#             test_Y = torch.load(os.path.join(cifar_dir, 'test_Y'))
-#             
-#             test_Y = torch.tensor(test_Y)
-#         
-#             train_Y = torch.tensor(train_Y)
-#             
-#             return train_X, train_Y, test_X, test_Y
-
-        data_train = torchvision.datasets.CIFAR10(git_ignore_folder + '/cifar10',
-                       download=True,
-                       transform=transform_train)
-        data_test = torchvision.datasets.CIFAR10(git_ignore_folder + '/cifar10',
-                          train=False,
-                          download=True,
-                          transform=transform_test)
-        
-        total_ids = torch.randperm(data_train.data.data.shape[0])
-        
-        training_id_count = int(data_train.data.data.shape[0]*0.1)
-        
-        valid_ids = total_ids[0:training_id_count]
-        
-        training_ids = total_ids[training_id_count:]
-        
-        train_X = self.transform_cifar10(np.array(data_train.data.data)[training_ids.numpy()], transform_train, len(transform_train.transforms)).type(torch.DoubleTensor)
-        
-        train_Y = torch.tensor(np.array(data_train.targets)[training_ids.numpy()])
-        
-        print('train_X shape::,', train_X.shape, train_Y.shape)
-        
-        valid_X = self.transform_cifar10(np.array(data_train.data.data)[valid_ids.numpy()], transform_test, len(transform_test.transforms)).type(torch.DoubleTensor)
-
-        valid_Y = torch.tensor(np.array(data_train.targets)[valid_ids.numpy()])
-        
-        print('valid_X shape::,', valid_X.shape, valid_Y.shape)
-        
-        test_X = self.transform_cifar10(np.array(data_test.data.data), transform_test, len(transform_test.transforms)).type(torch.DoubleTensor)
-        
-        print('test_X shape::', test_X.shape)
-        
-        test_Y = torch.tensor(data_test.targets)
-        
-        
-        torch.save(train_X, os.path.join(cifar_dir, 'train_X'))
-            
-        torch.save(test_X, os.path.join(cifar_dir, 'test_X'))
-
-        torch.save(train_Y, os.path.join(cifar_dir, 'train_Y'))
-            
-        torch.save(test_Y, os.path.join(cifar_dir, 'test_Y'))
-        
-        torch.save(valid_Y, os.path.join(cifar_dir, 'valid_Y'))
-            
-        torch.save(valid_X, os.path.join(cifar_dir, 'valid_X'))
-
-#         data_train = torchvision.datasets.CIFAR10(git_ignore_folder + '/cifar10',
-#                    download=True,
-#                    transform=transforms.Compose([
-#                        transforms.Resize((32, 32)),
-#                        transforms.RandomHorizontalFlip(),
-#                        transforms.ToTensor(),
-#                        transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010)),
-#                        ]))
-#         data_test = torchvision.datasets.CIFAR10(git_ignore_folder+ '/cifar10',
-#                       train=False,
-#                       download=True,
-#                       transform=transforms.Compose([
-#                           transforms.ToTensor(),
-#                           transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010)),
-#                           ]))
-
-        
-        return train_X, train_Y, (valid_X, test_X), (valid_Y, test_Y)
-        
-    
-    
-    def get_hyperparameters_cifar10(self, parameters, init_lr, regularization_rate):
-    
-    
-        criterion = nn.NLLLoss()
-        optimizer = optim.SGD(parameters, lr=init_lr, weight_decay = regularization_rate)
-        lr_scheduler = torch.optim.lr_scheduler.ExponentialLR(optimizer, gamma = 0.9)
-        
-#         regularization_rate = 0.1
-        
-        return criterion, optimizer, lr_scheduler
-    
-    
-    def get_num_class_cifar10(self):
-        return 10
-    
     def compute_output_before_last_layer(self, input, tl, transfer_model, transfer_model_modules, get_transfer_model_func, last_layer, is_GPU, device):
         
         this_input = input.clone()

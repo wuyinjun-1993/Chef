@@ -3,12 +3,12 @@ Created on Dec 11, 2020
 
 '''
 import torch
-from tqdm.notebook import tqdm
+# from tqdm.notebook import tqdm
 import torch.nn as nn
 import torch.optim as optim
 import numpy as np
 from torchvision import datasets,transforms
-from torch.utils.tensorboard import SummaryWriter
+# from torch.utils.tensorboard import SummaryWriter
 from torch.utils.data import DataLoader
 import time
 import copy
@@ -246,15 +246,22 @@ def obtain_fact_examples(args, noisy = False, load_origin = False, is_tars = Fal
     
     test_origin_dataset = None
     
-    training_feature_tensor = torch.load(full_output_dir + '/train_feature_tensor').type(torch.double)
+    # training_feature_tensor = torch.load(full_output_dir + '/train_feature_tensor').type(torch.double)
+    
+    training_feature_tensor = torch.load(os.path.join(full_output_dir, 'train_origin_feature_tensor')).type(torch.double)[:,-1]
     
     training_prob_labels = torch.load(full_output_dir + '/train_prob_labels').type(torch.double)
     
-    valid_feature_tensor = torch.load(full_output_dir + '/valid_feature_tensor').type(torch.double)
+    # valid_feature_tensor = torch.load(full_output_dir + '/valid_feature_tensor').type(torch.double)
+    
+    valid_feature_tensor = torch.load(os.path.join(full_output_dir, 'valid_origin_feature_tensor')).type(torch.double)[:,-1]
+    
     
     valid_labels = torch.load(full_output_dir + '/valid_labels')
     
-    test_feature_tensor = torch.load(full_output_dir + '/test_feature_tensor').type(torch.double)
+    # test_feature_tensor = torch.load(full_output_dir + '/test_feature_tensor').type(torch.double)
+    
+    test_feature_tensor = torch.load(os.path.join(full_output_dir, 'test_origin_feature_tensor')).type(torch.double)[:,-1]
     
     test_labels = torch.load(full_output_dir + '/test_labels')
     
@@ -386,15 +393,21 @@ def obtain_twitter_examples(args, noisy = False, load_origin = False, is_tars = 
     
     full_output_dir = args.output_dir
     
-    training_feature_tensor = torch.load(full_output_dir + '/train_features').type(torch.double)#[:,-10:]
+    # training_feature_tensor = torch.load(full_output_dir + '/train_features').type(torch.double)#[:,-10:]
+    
+    training_feature_tensor = torch.load(full_output_dir + '/train_origin_features').type(torch.double)[:,-1]
     
     training_prob_labels = torch.load(full_output_dir + '/train_labels').type(torch.double)
     
-    valid_feature_tensor = torch.load(full_output_dir + '/valid_features').type(torch.double)#[:,-10:]
+    # valid_feature_tensor = torch.load(full_output_dir + '/valid_features').type(torch.double)#[:,-10:]
+    
+    valid_feature_tensor = torch.load(full_output_dir + '/valid_origin_features').type(torch.double)[:,-1]
     
     valid_labels = torch.load(full_output_dir + '/valid_labels')
     
-    test_feature_tensor = torch.load(full_output_dir + '/test_features').type(torch.double)#[:,-10:]
+    # test_feature_tensor = torch.load(full_output_dir + '/test_features').type(torch.double)#[:,-10:]
+    
+    test_feature_tensor = torch.load(full_output_dir + '/test_origin_features').type(torch.double)[:,-1]
     
     test_labels = torch.load(full_output_dir + '/test_labels')
     
@@ -737,36 +750,36 @@ def obtain_oct_examples_origin(args, origin = False):
     return train_DL, valid_DL, test_DL, full_output_dir, binary 
 
 
-def obtain_mnist_examples_origin(args, origin = False):
-    dataset_name = args.dataset
-    
-    full_output_dir = os.path.join(args.output_dir, dataset_name)
-        
-    if not os.path.exists(full_output_dir):
-        os.makedirs(full_output_dir)
-        
-        
-    data_preparer = models.Data_preparer()
-    
-    dataset_train, dataset_test = get_train_test_data_loader_by_name_lr(data_preparer, args.output_dir, dataset_name)
-    
-    train_dataset, val_dataset = partition_val_dataset(dataset_train, ratio=0.1)
-
-    torch.save(train_dataset, full_output_dir + '/train_dataset')
-    
-    torch.save(val_dataset, full_output_dir + '/val_dataset')
-    
-    torch.save(dataset_test, full_output_dir + '/dataset_test')
-    
-    train_DL = DataLoader(dataset_train, args.bz)
-    
-    valid_DL = DataLoader(val_dataset, args.bz)
-    
-    test_DL = DataLoader(dataset_test, args.bz)
-    
-    binary = False
-    
-    return train_DL, valid_DL, test_DL, full_output_dir, binary 
+# def obtain_mnist_examples_origin(args, origin = False):
+#     dataset_name = args.dataset
+#
+#     full_output_dir = os.path.join(args.output_dir, dataset_name)
+#
+#     if not os.path.exists(full_output_dir):
+#         os.makedirs(full_output_dir)
+#
+#
+#     data_preparer = models.Data_preparer()
+#
+#     dataset_train, dataset_test = get_train_test_data_loader_by_name_lr(data_preparer, args.output_dir, dataset_name)
+#
+#     train_dataset, val_dataset = partition_val_dataset(dataset_train, ratio=0.1)
+#
+#     torch.save(train_dataset, full_output_dir + '/train_dataset')
+#
+#     torch.save(val_dataset, full_output_dir + '/val_dataset')
+#
+#     torch.save(dataset_test, full_output_dir + '/dataset_test')
+#
+#     train_DL = DataLoader(dataset_train, args.bz)
+#
+#     valid_DL = DataLoader(val_dataset, args.bz)
+#
+#     test_DL = DataLoader(dataset_test, args.bz)
+#
+#     binary = False
+#
+#     return train_DL, valid_DL, test_DL, full_output_dir, binary 
 
 def obtain_mimic_examples_origin(args, origin = False):
     dataset_name = args.dataset
@@ -1467,152 +1480,152 @@ def obtain_retina_examples(args, noisy = False, load_origin = False, is_tars = F
 
 #         return train_dataset, full_training_origin_labels, valid_dataset, test_dataset, small_dataset, full_output_dir
 
-def obtain_mnist_examples_del(args):
-    
-    dataset_name = args.dataset
-    
-    full_output_dir = os.path.join(args.output_dir, dataset_name)
-        
-    if not os.path.exists(full_output_dir):
-        os.makedirs(full_output_dir)
-        
-        
-    data_preparer = models.Data_preparer()
-    
-    if args.start:
-    
-        dataset_train, dataset_test = get_train_test_data_loader_by_name_lr(data_preparer, args.output_dir, dataset_name)
-        
-        train_dataset, val_dataset = partition_val_dataset(dataset_train, ratio=0.1)
-    
-        torch.save(train_dataset, full_output_dir + '/train_dataset')
-        
-        torch.save(val_dataset, full_output_dir + '/val_dataset')
-        
-        torch.save(dataset_test, full_output_dir + '/dataset_test')
-    
-    else:
-        train_dataset = torch.load(full_output_dir + '/train_dataset')
-        
-        val_dataset = torch.load(full_output_dir + '/val_dataset')
-        
-        dataset_test = torch.load(full_output_dir + '/dataset_test')
-    
-#     dataset_val =
-    
-    
-#     full_training_noisy_dataset = torch.load(full_output_dir + '/full_training_noisy_dataset')
-#         
-#     full_training_origin_labels = torch.load(full_output_dir + '/full_training_origin_labels')
-#     
-#     validation_dataset = torch.load(full_output_dir + '/validation_dataset')
-#     
-#     dataset_test = torch.load(full_output_dir + '/test_dataset')
-    binary = False
-    return train_dataset, val_dataset, dataset_test, full_output_dir, binary
+# def obtain_mnist_examples_del(args):
+#
+#     dataset_name = args.dataset
+#
+#     full_output_dir = os.path.join(args.output_dir, dataset_name)
+#
+#     if not os.path.exists(full_output_dir):
+#         os.makedirs(full_output_dir)
+#
+#
+#     data_preparer = models.Data_preparer()
+#
+#     if args.start:
+#
+#         dataset_train, dataset_test = get_train_test_data_loader_by_name_lr(data_preparer, args.output_dir, dataset_name)
+#
+#         train_dataset, val_dataset = partition_val_dataset(dataset_train, ratio=0.1)
+#
+#         torch.save(train_dataset, full_output_dir + '/train_dataset')
+#
+#         torch.save(val_dataset, full_output_dir + '/val_dataset')
+#
+#         torch.save(dataset_test, full_output_dir + '/dataset_test')
+#
+#     else:
+#         train_dataset = torch.load(full_output_dir + '/train_dataset')
+#
+#         val_dataset = torch.load(full_output_dir + '/val_dataset')
+#
+#         dataset_test = torch.load(full_output_dir + '/dataset_test')
+#
+# #     dataset_val =
+#
+#
+# #     full_training_noisy_dataset = torch.load(full_output_dir + '/full_training_noisy_dataset')
+# #         
+# #     full_training_origin_labels = torch.load(full_output_dir + '/full_training_origin_labels')
+# #     
+# #     validation_dataset = torch.load(full_output_dir + '/validation_dataset')
+# #     
+# #     dataset_test = torch.load(full_output_dir + '/test_dataset')
+#     binary = False
+#     return train_dataset, val_dataset, dataset_test, full_output_dir, binary
 
 
-def obtain_cifar10_examples_origin(args):
-    
-    dataset_name = args.dataset
-    
-    full_output_dir = os.path.join(args.output_dir, dataset_name)
-        
-    if not os.path.exists(full_output_dir):
-        os.makedirs(full_output_dir)
-        
-        
-    data_preparer = models.Data_preparer()
-    
-    if args.start:
-    
-        dataset_train, dataset_test = get_train_test_data_loader_by_name_lr(data_preparer, args.output_dir, dataset_name)
-        
-        train_dataset, val_dataset = partition_val_dataset(dataset_train, ratio=0.1)
-    
-        torch.save(train_dataset, full_output_dir + '/train_dataset')
-        
-        torch.save(val_dataset, full_output_dir + '/val_dataset')
-        
-        torch.save(dataset_test, full_output_dir + '/dataset_test')
-    
-    else:
-        train_dataset = torch.load(full_output_dir + '/train_dataset')
-        
-        val_dataset = torch.load(full_output_dir + '/val_dataset')
-        
-        dataset_test = torch.load(full_output_dir + '/dataset_test')
-    
-#     dataset_val =
-    
-    
-#     full_training_noisy_dataset = torch.load(full_output_dir + '/full_training_noisy_dataset')
-#         
-#     full_training_origin_labels = torch.load(full_output_dir + '/full_training_origin_labels')
-#     
-#     validation_dataset = torch.load(full_output_dir + '/validation_dataset')
-#     
-#     dataset_test = torch.load(full_output_dir + '/test_dataset')
-    binary = False
-    
-    train_DL = DataLoader(train_dataset, batch_size=args.bz)
-    
-    valid_DL = DataLoader(val_dataset, batch_size=args.bz)
-    
-    test_DL = DataLoader(dataset_test, batch_size=args.bz)
-    
-    return train_DL, valid_DL, test_DL, full_output_dir, binary
-
-def obtain_cifar10_examples(args):
-    
-    dataset_name = args.dataset
-    
-    full_output_dir = os.path.join(args.output_dir, dataset_name)
-        
-    if not os.path.exists(full_output_dir):
-        os.makedirs(full_output_dir)
-        
-        
-    data_preparer = models.Data_preparer()
-    
-    if args.start:
-    
-        train_dataset, val_dataset, dataset_test = get_train_test_data_loader_by_name_lr(data_preparer, args.output_dir, dataset_name)
-        
-#         train_dataset, val_dataset = partition_val_dataset(dataset_train, ratio=0.05)
-    
-        torch.save(train_dataset, full_output_dir + '/train_dataset')
-        
-        torch.save(val_dataset, full_output_dir + '/val_dataset')
-        
-        torch.save(dataset_test, full_output_dir + '/dataset_test')
-    
-    else:
-        train_dataset = torch.load(full_output_dir + '/train_dataset')
-        
-        val_dataset = torch.load(full_output_dir + '/val_dataset')
-        
-        dataset_test = torch.load(full_output_dir + '/dataset_test')
-    
-#     dataset_val =
-    
-    
-#     full_training_noisy_dataset = torch.load(full_output_dir + '/full_training_noisy_dataset')
-#         
-#     full_training_origin_labels = torch.load(full_output_dir + '/full_training_origin_labels')
-#     
-#     validation_dataset = torch.load(full_output_dir + '/validation_dataset')
-#     
-#     dataset_test = torch.load(full_output_dir + '/test_dataset')
-    binary = False
-    
+# def obtain_cifar10_examples_origin(args):
+#
+#     dataset_name = args.dataset
+#
+#     full_output_dir = os.path.join(args.output_dir, dataset_name)
+#
+#     if not os.path.exists(full_output_dir):
+#         os.makedirs(full_output_dir)
+#
+#
+#     data_preparer = models.Data_preparer()
+#
+#     if args.start:
+#
+#         dataset_train, dataset_test = get_train_test_data_loader_by_name_lr(data_preparer, args.output_dir, dataset_name)
+#
+#         train_dataset, val_dataset = partition_val_dataset(dataset_train, ratio=0.1)
+#
+#         torch.save(train_dataset, full_output_dir + '/train_dataset')
+#
+#         torch.save(val_dataset, full_output_dir + '/val_dataset')
+#
+#         torch.save(dataset_test, full_output_dir + '/dataset_test')
+#
+#     else:
+#         train_dataset = torch.load(full_output_dir + '/train_dataset')
+#
+#         val_dataset = torch.load(full_output_dir + '/val_dataset')
+#
+#         dataset_test = torch.load(full_output_dir + '/dataset_test')
+#
+# #     dataset_val =
+#
+#
+# #     full_training_noisy_dataset = torch.load(full_output_dir + '/full_training_noisy_dataset')
+# #         
+# #     full_training_origin_labels = torch.load(full_output_dir + '/full_training_origin_labels')
+# #     
+# #     validation_dataset = torch.load(full_output_dir + '/validation_dataset')
+# #     
+# #     dataset_test = torch.load(full_output_dir + '/test_dataset')
+#     binary = False
+#
 #     train_DL = DataLoader(train_dataset, batch_size=args.bz)
-#     
+#
 #     valid_DL = DataLoader(val_dataset, batch_size=args.bz)
-#     
+#
 #     test_DL = DataLoader(dataset_test, batch_size=args.bz)
-    
-    return train_dataset, val_dataset, dataset_test, full_output_dir, binary
+#
+#     return train_DL, valid_DL, test_DL, full_output_dir, binary
+#
+# def obtain_cifar10_examples(args):
+#
+#     dataset_name = args.dataset
+#
+#     full_output_dir = os.path.join(args.output_dir, dataset_name)
+#
+#     if not os.path.exists(full_output_dir):
+#         os.makedirs(full_output_dir)
+#
+#
+#     data_preparer = models.Data_preparer()
+#
+#     if args.start:
+#
+#         train_dataset, val_dataset, dataset_test = get_train_test_data_loader_by_name_lr(data_preparer, args.output_dir, dataset_name)
+#
+# #         train_dataset, val_dataset = partition_val_dataset(dataset_train, ratio=0.05)
+#
+#         torch.save(train_dataset, full_output_dir + '/train_dataset')
+#
+#         torch.save(val_dataset, full_output_dir + '/val_dataset')
+#
+#         torch.save(dataset_test, full_output_dir + '/dataset_test')
+#
+#     else:
+#         train_dataset = torch.load(full_output_dir + '/train_dataset')
+#
+#         val_dataset = torch.load(full_output_dir + '/val_dataset')
+#
+#         dataset_test = torch.load(full_output_dir + '/dataset_test')
+#
+# #     dataset_val =
+#
+#
+# #     full_training_noisy_dataset = torch.load(full_output_dir + '/full_training_noisy_dataset')
+# #         
+# #     full_training_origin_labels = torch.load(full_output_dir + '/full_training_origin_labels')
+# #     
+# #     validation_dataset = torch.load(full_output_dir + '/validation_dataset')
+# #     
+# #     dataset_test = torch.load(full_output_dir + '/test_dataset')
+#     binary = False
+#
+# #     train_DL = DataLoader(train_dataset, batch_size=args.bz)
+# #     
+# #     valid_DL = DataLoader(val_dataset, batch_size=args.bz)
+# #     
+# #     test_DL = DataLoader(dataset_test, batch_size=args.bz)
+#
+#     return train_dataset, val_dataset, dataset_test, full_output_dir, binary
 
 def get_loss_n_accuracy(model, data_loader, args, num_classes=2):
     """ Returns the loss and total accuracy, per class accuracy on the supplied data loader """
@@ -2309,7 +2322,7 @@ def unlabeled_loss(unlabeled_X, labeled_X, exp_labeled_output, eps, model):
     
     labeled_X_output_before_last_layer = model.forward_before_last_layer(labeled_X)
     
-    distances = torch.exp(-transductive_coeff*torch.sum((unlabeled_X_output_before_last_layer.view(unlabeled_X_output_before_last_layer.shape[0], 1, unlabeled_X_output_before_last_layer.shape[1]) - labeled_X_output_before_last_layer.view(1, labeled_X_output_before_last_layer.shape[0], labeled_X_output_before_last_layer.shape[1]))**2, dim = -1))
+    distances = torch.exp(-1*torch.sum((unlabeled_X_output_before_last_layer.view(unlabeled_X_output_before_last_layer.shape[0], 1, unlabeled_X_output_before_last_layer.shape[1]) - labeled_X_output_before_last_layer.view(1, labeled_X_output_before_last_layer.shape[0], labeled_X_output_before_last_layer.shape[1]))**2, dim = -1))
     
     meta_outputs = model.forward_from_before_last_layer(unlabeled_X_output_before_last_layer)
     

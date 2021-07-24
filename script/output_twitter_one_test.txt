@@ -1,0 +1,253 @@
+python3 gen_simulated_labels.py --dataset twitter --output_dir /home/wuyinjun/pg_data/twitter/
+default git ignore dir:: /home/wuyinjun/workspace/Chef/.gitignore
+Namespace(GPU=False, GPUID=None, GPU_measure=False, binary=False, bz=16, class=0, continue_labeling=False, dataset='twitter', del_ratio=0.001, derived_bz=1000, derived_epochs=1000, derived_l2=0, derived_lr=0.01, device=device(type='cpu'), did=0, dir=None, epochs=10, f1=False, hist_period=50, hist_size=2, incremental=False, init=15, inner_epoch_count=50, iter_count=None, jump=10, load_incremental=False, load_model=False, lr=0.1, model=None, no_probs=False, no_prov=False, noisy_ratio=0.1, norm=None, o2u_epochs=2, out_epoch_count=10, output_dir='/home/wuyinjun/pg_data/twitter/', period=20, regular_rate=1.0, removed_count=50, resolve_conflict=None, restart=False, same_y_diff=False, small_test=False, start=False, suffix='sl', tars=False, tlr=0.001, wd=0.001)
+11606 11606 11606 11606
+10446
+train shape:: torch.Size([11606, 768])
+is_tars::false
+run DUTI
+exp2_full.sh: line 87: ./hyper_twitter_one_initial_zero0: No such file or directory
+lr::
+l2 decay::
+epochs::
+batch size::
+source file:: ./hyper_twitter_one_initial_zero0
+start influence-l
+no retina
+start neural model
+0 full_pipeline_suggest_labels true
+bash run_full_pipeline_suggest_label_repeat_all.sh   /home/wuyinjun/pg_data/twitter/ twitter 200 10     true 0 false 2   full_pipeline_suggest_labels true sl_one_initial_zero0 0 ./hyper_twitter_one_initial_zero0 Logistic_regression false false
+run_full_pipeline_suggest_label_repeat_all.sh: line 29: source: filename argument required
+source: usage: source filename [arguments]
+source file:: 
+restart or not:: --restart
+repeat times:: 0
+python3 false.py --derived_lr  --bz full_pipeline_suggest_labels --epochs 2 --tlr 0 --norm loss --wd false --dataset 200 --model   --removed_count 50 --output_dir twitter --start --restart --hist_period /home/wuyinjun/pg_data/twitter/ --regular_rate false --suffix   --no_prov > twitter/output_vary_remove_count__start__sl_one_initial_zero0.txt 2>&1
+run_full_pipeline_suggest_label_repeat_all.sh: line 170: twitter/output_vary_remove_count__start__sl_one_initial_zero0.txt: No such file or directory
+run_full_pipeline_suggest_label_repeat_all.sh: line 178: ((: 0 <  : syntax error: operand expected (error token is "<  ")
+rm: cannot remove 'twitter/full_training_noisy_dataset_*': No such file or directory
+rm: cannot remove 'twitter/Logistic_regression_influence_*': No such file or directory
+rm: cannot remove 'twitter/full_existing_labeled_id_tensor_*': No such file or directory
+rm: cannot remove 'twitter/w_list_*': No such file or directory
+rm: cannot remove 'twitter/grad_list_*': No such file or directory
+1 full_pipeline_active_learning false
+bash run_full_pipeline_suggest_label_repeat_all.sh   /home/wuyinjun/pg_data/twitter/ twitter 200 10     false 0 false 2   full_pipeline_active_learning false ac_one_initial_zero0 0 ./hyper_twitter_one_initial_zero0 Logistic_regression false false
+run_full_pipeline_suggest_label_repeat_all.sh: line 29: source: filename argument required
+source: usage: source filename [arguments]
+source file:: 
+restart or not::
+repeat times:: 0
+python3 false.py --derived_lr  --bz full_pipeline_active_learning --epochs 2 --tlr 0 --norm loss --wd false --dataset 200 --model   --removed_count 50 --output_dir twitter --start  --hist_period /home/wuyinjun/pg_data/twitter/ --regular_rate false --suffix   --no_prov > twitter/output_vary_remove_count__start__ac_one_initial_zero0.txt 2>&1
+run_full_pipeline_suggest_label_repeat_all.sh: line 170: twitter/output_vary_remove_count__start__ac_one_initial_zero0.txt: No such file or directory
+run_full_pipeline_suggest_label_repeat_all.sh: line 178: ((: 0 <  : syntax error: operand expected (error token is "<  ")
+rm: cannot remove 'twitter/full_training_noisy_dataset_*': No such file or directory
+rm: cannot remove 'twitter/Logistic_regression_influence_*': No such file or directory
+rm: cannot remove 'twitter/full_existing_labeled_id_tensor_*': No such file or directory
+rm: cannot remove 'twitter/w_list_*': No such file or directory
+rm: cannot remove 'twitter/grad_list_*': No such file or directory
+2 full_pipeline_active_learning_entropy false
+bash run_full_pipeline_suggest_label_repeat_all.sh   /home/wuyinjun/pg_data/twitter/ twitter 200 10     false 0 false 2   full_pipeline_active_learning_entropy false ac2_one_initial_zero0 0 ./hyper_twitter_one_initial_zero0 Logistic_regression false false
+run_full_pipeline_suggest_label_repeat_all.sh: line 29: source: filename argument required
+source: usage: source filename [arguments]
+source file:: 
+restart or not::
+repeat times:: 0
+python3 false.py --derived_lr  --bz full_pipeline_active_learning_entropy --epochs 2 --tlr 0 --norm loss --wd false --dataset 200 --model   --removed_count 50 --output_dir twitter --start  --hist_period /home/wuyinjun/pg_data/twitter/ --regular_rate false --suffix   --no_prov > twitter/output_vary_remove_count__start__ac2_one_initial_zero0.txt 2>&1
+run_full_pipeline_suggest_label_repeat_all.sh: line 170: twitter/output_vary_remove_count__start__ac2_one_initial_zero0.txt: No such file or directory
+run_full_pipeline_suggest_label_repeat_all.sh: line 178: ((: 0 <  : syntax error: operand expected (error token is "<  ")
+rm: cannot remove 'twitter/full_training_noisy_dataset_*': No such file or directory
+rm: cannot remove 'twitter/Logistic_regression_influence_*': No such file or directory
+rm: cannot remove 'twitter/full_existing_labeled_id_tensor_*': No such file or directory
+rm: cannot remove 'twitter/w_list_*': No such file or directory
+rm: cannot remove 'twitter/grad_list_*': No such file or directory
+3 full_pipeline false
+bash run_full_pipeline_suggest_label_repeat_all.sh   /home/wuyinjun/pg_data/twitter/ twitter 200 10     false 0 false 2   full_pipeline false infl_one_initial_zero0 0 ./hyper_twitter_one_initial_zero0 Logistic_regression false false
+run_full_pipeline_suggest_label_repeat_all.sh: line 29: source: filename argument required
+source: usage: source filename [arguments]
+source file:: 
+restart or not::
+repeat times:: 0
+python3 false.py --derived_lr  --bz full_pipeline --epochs 2 --tlr 0 --norm loss --wd false --dataset 200 --model   --removed_count 50 --output_dir twitter --start  --hist_period /home/wuyinjun/pg_data/twitter/ --regular_rate false --suffix   --no_prov > twitter/output_vary_remove_count__start__infl_one_initial_zero0.txt 2>&1
+run_full_pipeline_suggest_label_repeat_all.sh: line 170: twitter/output_vary_remove_count__start__infl_one_initial_zero0.txt: No such file or directory
+run_full_pipeline_suggest_label_repeat_all.sh: line 178: ((: 0 <  : syntax error: operand expected (error token is "<  ")
+rm: cannot remove 'twitter/full_training_noisy_dataset_*': No such file or directory
+rm: cannot remove 'twitter/Logistic_regression_influence_*': No such file or directory
+rm: cannot remove 'twitter/full_existing_labeled_id_tensor_*': No such file or directory
+rm: cannot remove 'twitter/w_list_*': No such file or directory
+rm: cannot remove 'twitter/grad_list_*': No such file or directory
+4 full_pipeline_o2u false
+bash run_full_pipeline_suggest_label_repeat_all.sh   /home/wuyinjun/pg_data/twitter/ twitter 200 10     false 0 false 2   full_pipeline_o2u false o2u_one_initial_zero0 0 ./hyper_twitter_one_initial_zero0 Logistic_regression false false
+run_full_pipeline_suggest_label_repeat_all.sh: line 29: source: filename argument required
+source: usage: source filename [arguments]
+source file:: 
+restart or not::
+repeat times:: 0
+python3 false.py --derived_lr  --bz full_pipeline_o2u --epochs 2 --tlr 0 --norm loss --wd false --dataset 200 --model   --removed_count 50 --output_dir twitter --start  --hist_period /home/wuyinjun/pg_data/twitter/ --regular_rate false --suffix   --no_prov > twitter/output_vary_remove_count__start__o2u_one_initial_zero0.txt 2>&1
+run_full_pipeline_suggest_label_repeat_all.sh: line 170: twitter/output_vary_remove_count__start__o2u_one_initial_zero0.txt: No such file or directory
+run_full_pipeline_suggest_label_repeat_all.sh: line 178: ((: 0 <  : syntax error: operand expected (error token is "<  ")
+rm: cannot remove 'twitter/full_training_noisy_dataset_*': No such file or directory
+rm: cannot remove 'twitter/Logistic_regression_influence_*': No such file or directory
+rm: cannot remove 'twitter/full_existing_labeled_id_tensor_*': No such file or directory
+rm: cannot remove 'twitter/w_list_*': No such file or directory
+rm: cannot remove 'twitter/grad_list_*': No such file or directory
+rm: cannot remove '/home/wuyinjun/pg_data/twitter//full_training_noisy_dataset_o2u_one_initial_zero0_v*': No such file or directory
+rm: cannot remove '/home/wuyinjun/pg_data/twitter//Logistic_regression_influence_*': No such file or directory
+rm: cannot remove '/home/wuyinjun/pg_data/twitter//full_existing_labeled_id_tensor_o2u_one_initial_zero0_v*': No such file or directory
+start neural model
+0 full_pipeline_suggest_labels true
+bash run_full_pipeline_suggest_label_repeat_all.sh   /home/wuyinjun/pg_data/twitter/ twitter 200 10     true 1 false 2   full_pipeline_suggest_labels true sl_one_initial_zero0 0 ./hyper_twitter_one_initial_zero0 Logistic_regression false false
+run_full_pipeline_suggest_label_repeat_all.sh: line 29: source: filename argument required
+source: usage: source filename [arguments]
+source file:: 
+restart or not:: --restart
+repeat times:: 0
+python3 false.py --derived_lr  --bz full_pipeline_suggest_labels --epochs 2 --tlr 1 --norm loss --wd false --dataset 200 --model   --removed_count 50 --output_dir twitter --start --restart --hist_period /home/wuyinjun/pg_data/twitter/ --regular_rate false --suffix   --no_prov > twitter/output_vary_remove_count__start__sl_one_initial_zero0.txt 2>&1
+run_full_pipeline_suggest_label_repeat_all.sh: line 170: twitter/output_vary_remove_count__start__sl_one_initial_zero0.txt: No such file or directory
+run_full_pipeline_suggest_label_repeat_all.sh: line 178: ((: 0 <  : syntax error: operand expected (error token is "<  ")
+rm: cannot remove 'twitter/full_training_noisy_dataset_*': No such file or directory
+rm: cannot remove 'twitter/Logistic_regression_influence_*': No such file or directory
+rm: cannot remove 'twitter/full_existing_labeled_id_tensor_*': No such file or directory
+rm: cannot remove 'twitter/w_list_*': No such file or directory
+rm: cannot remove 'twitter/grad_list_*': No such file or directory
+1 full_pipeline_active_learning false
+bash run_full_pipeline_suggest_label_repeat_all.sh   /home/wuyinjun/pg_data/twitter/ twitter 200 10     false 1 false 2   full_pipeline_active_learning false ac_one_initial_zero0 0 ./hyper_twitter_one_initial_zero0 Logistic_regression false false
+run_full_pipeline_suggest_label_repeat_all.sh: line 29: source: filename argument required
+source: usage: source filename [arguments]
+source file:: 
+restart or not::
+repeat times:: 0
+python3 false.py --derived_lr  --bz full_pipeline_active_learning --epochs 2 --tlr 1 --norm loss --wd false --dataset 200 --model   --removed_count 50 --output_dir twitter --start  --hist_period /home/wuyinjun/pg_data/twitter/ --regular_rate false --suffix   --no_prov > twitter/output_vary_remove_count__start__ac_one_initial_zero0.txt 2>&1
+run_full_pipeline_suggest_label_repeat_all.sh: line 170: twitter/output_vary_remove_count__start__ac_one_initial_zero0.txt: No such file or directory
+run_full_pipeline_suggest_label_repeat_all.sh: line 178: ((: 0 <  : syntax error: operand expected (error token is "<  ")
+rm: cannot remove 'twitter/full_training_noisy_dataset_*': No such file or directory
+rm: cannot remove 'twitter/Logistic_regression_influence_*': No such file or directory
+rm: cannot remove 'twitter/full_existing_labeled_id_tensor_*': No such file or directory
+rm: cannot remove 'twitter/w_list_*': No such file or directory
+rm: cannot remove 'twitter/grad_list_*': No such file or directory
+2 full_pipeline_active_learning_entropy false
+bash run_full_pipeline_suggest_label_repeat_all.sh   /home/wuyinjun/pg_data/twitter/ twitter 200 10     false 1 false 2   full_pipeline_active_learning_entropy false ac2_one_initial_zero0 0 ./hyper_twitter_one_initial_zero0 Logistic_regression false false
+run_full_pipeline_suggest_label_repeat_all.sh: line 29: source: filename argument required
+source: usage: source filename [arguments]
+source file:: 
+restart or not::
+repeat times:: 0
+python3 false.py --derived_lr  --bz full_pipeline_active_learning_entropy --epochs 2 --tlr 1 --norm loss --wd false --dataset 200 --model   --removed_count 50 --output_dir twitter --start  --hist_period /home/wuyinjun/pg_data/twitter/ --regular_rate false --suffix   --no_prov > twitter/output_vary_remove_count__start__ac2_one_initial_zero0.txt 2>&1
+run_full_pipeline_suggest_label_repeat_all.sh: line 170: twitter/output_vary_remove_count__start__ac2_one_initial_zero0.txt: No such file or directory
+run_full_pipeline_suggest_label_repeat_all.sh: line 178: ((: 0 <  : syntax error: operand expected (error token is "<  ")
+rm: cannot remove 'twitter/full_training_noisy_dataset_*': No such file or directory
+rm: cannot remove 'twitter/Logistic_regression_influence_*': No such file or directory
+rm: cannot remove 'twitter/full_existing_labeled_id_tensor_*': No such file or directory
+rm: cannot remove 'twitter/w_list_*': No such file or directory
+rm: cannot remove 'twitter/grad_list_*': No such file or directory
+3 full_pipeline false
+bash run_full_pipeline_suggest_label_repeat_all.sh   /home/wuyinjun/pg_data/twitter/ twitter 200 10     false 1 false 2   full_pipeline false infl_one_initial_zero0 0 ./hyper_twitter_one_initial_zero0 Logistic_regression false false
+run_full_pipeline_suggest_label_repeat_all.sh: line 29: source: filename argument required
+source: usage: source filename [arguments]
+source file:: 
+restart or not::
+repeat times:: 0
+python3 false.py --derived_lr  --bz full_pipeline --epochs 2 --tlr 1 --norm loss --wd false --dataset 200 --model   --removed_count 50 --output_dir twitter --start  --hist_period /home/wuyinjun/pg_data/twitter/ --regular_rate false --suffix   --no_prov > twitter/output_vary_remove_count__start__infl_one_initial_zero0.txt 2>&1
+run_full_pipeline_suggest_label_repeat_all.sh: line 170: twitter/output_vary_remove_count__start__infl_one_initial_zero0.txt: No such file or directory
+run_full_pipeline_suggest_label_repeat_all.sh: line 178: ((: 0 <  : syntax error: operand expected (error token is "<  ")
+rm: cannot remove 'twitter/full_training_noisy_dataset_*': No such file or directory
+rm: cannot remove 'twitter/Logistic_regression_influence_*': No such file or directory
+rm: cannot remove 'twitter/full_existing_labeled_id_tensor_*': No such file or directory
+rm: cannot remove 'twitter/w_list_*': No such file or directory
+rm: cannot remove 'twitter/grad_list_*': No such file or directory
+4 full_pipeline_o2u false
+bash run_full_pipeline_suggest_label_repeat_all.sh   /home/wuyinjun/pg_data/twitter/ twitter 200 10     false 1 false 2   full_pipeline_o2u false o2u_one_initial_zero0 0 ./hyper_twitter_one_initial_zero0 Logistic_regression false false
+run_full_pipeline_suggest_label_repeat_all.sh: line 29: source: filename argument required
+source: usage: source filename [arguments]
+source file:: 
+restart or not::
+repeat times:: 0
+python3 false.py --derived_lr  --bz full_pipeline_o2u --epochs 2 --tlr 1 --norm loss --wd false --dataset 200 --model   --removed_count 50 --output_dir twitter --start  --hist_period /home/wuyinjun/pg_data/twitter/ --regular_rate false --suffix   --no_prov > twitter/output_vary_remove_count__start__o2u_one_initial_zero0.txt 2>&1
+run_full_pipeline_suggest_label_repeat_all.sh: line 170: twitter/output_vary_remove_count__start__o2u_one_initial_zero0.txt: No such file or directory
+run_full_pipeline_suggest_label_repeat_all.sh: line 178: ((: 0 <  : syntax error: operand expected (error token is "<  ")
+rm: cannot remove 'twitter/full_training_noisy_dataset_*': No such file or directory
+rm: cannot remove 'twitter/Logistic_regression_influence_*': No such file or directory
+rm: cannot remove 'twitter/full_existing_labeled_id_tensor_*': No such file or directory
+rm: cannot remove 'twitter/w_list_*': No such file or directory
+rm: cannot remove 'twitter/grad_list_*': No such file or directory
+rm: cannot remove '/home/wuyinjun/pg_data/twitter//full_training_noisy_dataset_o2u_one_initial_zero0_v*': No such file or directory
+rm: cannot remove '/home/wuyinjun/pg_data/twitter//Logistic_regression_influence_*': No such file or directory
+rm: cannot remove '/home/wuyinjun/pg_data/twitter//full_existing_labeled_id_tensor_o2u_one_initial_zero0_v*': No such file or directory
+start neural model
+0 full_pipeline_suggest_labels true
+bash run_full_pipeline_suggest_label_repeat_all.sh   /home/wuyinjun/pg_data/twitter/ twitter 200 10     true 2 false 2   full_pipeline_suggest_labels true sl_one_initial_zero0 0 ./hyper_twitter_one_initial_zero0 Logistic_regression false false
+run_full_pipeline_suggest_label_repeat_all.sh: line 29: source: filename argument required
+source: usage: source filename [arguments]
+source file:: 
+restart or not:: --restart
+repeat times:: 0
+python3 false.py --derived_lr  --bz full_pipeline_suggest_labels --epochs 2 --tlr 2 --norm loss --wd false --dataset 200 --model   --removed_count 50 --output_dir twitter --start --restart --hist_period /home/wuyinjun/pg_data/twitter/ --regular_rate false --suffix   --no_prov > twitter/output_vary_remove_count__start__sl_one_initial_zero0.txt 2>&1
+run_full_pipeline_suggest_label_repeat_all.sh: line 170: twitter/output_vary_remove_count__start__sl_one_initial_zero0.txt: No such file or directory
+run_full_pipeline_suggest_label_repeat_all.sh: line 178: ((: 0 <  : syntax error: operand expected (error token is "<  ")
+rm: cannot remove 'twitter/full_training_noisy_dataset_*': No such file or directory
+rm: cannot remove 'twitter/Logistic_regression_influence_*': No such file or directory
+rm: cannot remove 'twitter/full_existing_labeled_id_tensor_*': No such file or directory
+rm: cannot remove 'twitter/w_list_*': No such file or directory
+rm: cannot remove 'twitter/grad_list_*': No such file or directory
+1 full_pipeline_active_learning false
+bash run_full_pipeline_suggest_label_repeat_all.sh   /home/wuyinjun/pg_data/twitter/ twitter 200 10     false 2 false 2   full_pipeline_active_learning false ac_one_initial_zero0 0 ./hyper_twitter_one_initial_zero0 Logistic_regression false false
+run_full_pipeline_suggest_label_repeat_all.sh: line 29: source: filename argument required
+source: usage: source filename [arguments]
+source file:: 
+restart or not::
+repeat times:: 0
+python3 false.py --derived_lr  --bz full_pipeline_active_learning --epochs 2 --tlr 2 --norm loss --wd false --dataset 200 --model   --removed_count 50 --output_dir twitter --start  --hist_period /home/wuyinjun/pg_data/twitter/ --regular_rate false --suffix   --no_prov > twitter/output_vary_remove_count__start__ac_one_initial_zero0.txt 2>&1
+run_full_pipeline_suggest_label_repeat_all.sh: line 170: twitter/output_vary_remove_count__start__ac_one_initial_zero0.txt: No such file or directory
+run_full_pipeline_suggest_label_repeat_all.sh: line 178: ((: 0 <  : syntax error: operand expected (error token is "<  ")
+rm: cannot remove 'twitter/full_training_noisy_dataset_*': No such file or directory
+rm: cannot remove 'twitter/Logistic_regression_influence_*': No such file or directory
+rm: cannot remove 'twitter/full_existing_labeled_id_tensor_*': No such file or directory
+rm: cannot remove 'twitter/w_list_*': No such file or directory
+rm: cannot remove 'twitter/grad_list_*': No such file or directory
+2 full_pipeline_active_learning_entropy false
+bash run_full_pipeline_suggest_label_repeat_all.sh   /home/wuyinjun/pg_data/twitter/ twitter 200 10     false 2 false 2   full_pipeline_active_learning_entropy false ac2_one_initial_zero0 0 ./hyper_twitter_one_initial_zero0 Logistic_regression false false
+run_full_pipeline_suggest_label_repeat_all.sh: line 29: source: filename argument required
+source: usage: source filename [arguments]
+source file:: 
+restart or not::
+repeat times:: 0
+python3 false.py --derived_lr  --bz full_pipeline_active_learning_entropy --epochs 2 --tlr 2 --norm loss --wd false --dataset 200 --model   --removed_count 50 --output_dir twitter --start  --hist_period /home/wuyinjun/pg_data/twitter/ --regular_rate false --suffix   --no_prov > twitter/output_vary_remove_count__start__ac2_one_initial_zero0.txt 2>&1
+run_full_pipeline_suggest_label_repeat_all.sh: line 170: twitter/output_vary_remove_count__start__ac2_one_initial_zero0.txt: No such file or directory
+run_full_pipeline_suggest_label_repeat_all.sh: line 178: ((: 0 <  : syntax error: operand expected (error token is "<  ")
+rm: cannot remove 'twitter/full_training_noisy_dataset_*': No such file or directory
+rm: cannot remove 'twitter/Logistic_regression_influence_*': No such file or directory
+rm: cannot remove 'twitter/full_existing_labeled_id_tensor_*': No such file or directory
+rm: cannot remove 'twitter/w_list_*': No such file or directory
+rm: cannot remove 'twitter/grad_list_*': No such file or directory
+3 full_pipeline false
+bash run_full_pipeline_suggest_label_repeat_all.sh   /home/wuyinjun/pg_data/twitter/ twitter 200 10     false 2 false 2   full_pipeline false infl_one_initial_zero0 0 ./hyper_twitter_one_initial_zero0 Logistic_regression false false
+run_full_pipeline_suggest_label_repeat_all.sh: line 29: source: filename argument required
+source: usage: source filename [arguments]
+source file:: 
+restart or not::
+repeat times:: 0
+python3 false.py --derived_lr  --bz full_pipeline --epochs 2 --tlr 2 --norm loss --wd false --dataset 200 --model   --removed_count 50 --output_dir twitter --start  --hist_period /home/wuyinjun/pg_data/twitter/ --regular_rate false --suffix   --no_prov > twitter/output_vary_remove_count__start__infl_one_initial_zero0.txt 2>&1
+run_full_pipeline_suggest_label_repeat_all.sh: line 170: twitter/output_vary_remove_count__start__infl_one_initial_zero0.txt: No such file or directory
+run_full_pipeline_suggest_label_repeat_all.sh: line 178: ((: 0 <  : syntax error: operand expected (error token is "<  ")
+rm: cannot remove 'twitter/full_training_noisy_dataset_*': No such file or directory
+rm: cannot remove 'twitter/Logistic_regression_influence_*': No such file or directory
+rm: cannot remove 'twitter/full_existing_labeled_id_tensor_*': No such file or directory
+rm: cannot remove 'twitter/w_list_*': No such file or directory
+rm: cannot remove 'twitter/grad_list_*': No such file or directory
+4 full_pipeline_o2u false
+bash run_full_pipeline_suggest_label_repeat_all.sh   /home/wuyinjun/pg_data/twitter/ twitter 200 10     false 2 false 2   full_pipeline_o2u false o2u_one_initial_zero0 0 ./hyper_twitter_one_initial_zero0 Logistic_regression false false
+run_full_pipeline_suggest_label_repeat_all.sh: line 29: source: filename argument required
+source: usage: source filename [arguments]
+source file:: 
+restart or not::
+repeat times:: 0
+python3 false.py --derived_lr  --bz full_pipeline_o2u --epochs 2 --tlr 2 --norm loss --wd false --dataset 200 --model   --removed_count 50 --output_dir twitter --start  --hist_period /home/wuyinjun/pg_data/twitter/ --regular_rate false --suffix   --no_prov > twitter/output_vary_remove_count__start__o2u_one_initial_zero0.txt 2>&1
+run_full_pipeline_suggest_label_repeat_all.sh: line 170: twitter/output_vary_remove_count__start__o2u_one_initial_zero0.txt: No such file or directory
+run_full_pipeline_suggest_label_repeat_all.sh: line 178: ((: 0 <  : syntax error: operand expected (error token is "<  ")
+rm: cannot remove 'twitter/full_training_noisy_dataset_*': No such file or directory
+rm: cannot remove 'twitter/Logistic_regression_influence_*': No such file or directory
+rm: cannot remove 'twitter/full_existing_labeled_id_tensor_*': No such file or directory
+rm: cannot remove 'twitter/w_list_*': No such file or directory
+rm: cannot remove 'twitter/grad_list_*': No such file or directory
+rm: cannot remove '/home/wuyinjun/pg_data/twitter//full_training_noisy_dataset_o2u_one_initial_zero0_v*': No such file or directory
+rm: cannot remove '/home/wuyinjun/pg_data/twitter//Logistic_regression_influence_*': No such file or directory
+rm: cannot remove '/home/wuyinjun/pg_data/twitter//full_existing_labeled_id_tensor_o2u_one_initial_zero0_v*': No such file or directory

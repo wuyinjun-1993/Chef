@@ -11,7 +11,7 @@ import numpy as np
 import pandas as pd
 import torch
 import torch.nn as nn
-import tensorflow as tf
+# import tensorflow as tf
 from sklearn.model_selection import train_test_split
 
 # from snorkel.classification.data import DictDataset, DictDataLoader
@@ -34,7 +34,7 @@ try:
     from models.util_func import *
     from utils.utils import *
     # from train import *
-    import pytorch_influence_functions as ptif
+    # import pytorch_influence_functions as ptif
     
     
 except ImportError:
@@ -1107,72 +1107,6 @@ def load_spam_dataset(load_train_labels: bool = True, split_dev_valid: bool = Fa
         return df_train, df_test
 
 
-def get_keras_logreg(input_dim, output_dim=2):
-    model = tf.keras.Sequential()
-    if output_dim == 1:
-        loss = "binary_crossentropy"
-        activation = tf.nn.sigmoid
-    else:
-        loss = "categorical_crossentropy"
-        activation = tf.nn.softmax
-    dense = tf.keras.layers.Dense(
-        units=output_dim,
-        input_dim=input_dim,
-        activation=activation,
-        kernel_regularizer=tf.keras.regularizers.l2(0.001),
-    )
-    model.add(dense)
-    opt = tf.keras.optimizers.Adam(lr=0.01)
-    model.compile(optimizer=opt, loss=loss, metrics=["accuracy"])
-    return model
-
-
-def get_keras_lstm(num_buckets, embed_dim=16, rnn_state_size=64):
-    lstm_model = tf.keras.Sequential()
-    lstm_model.add(tf.keras.layers.Embedding(num_buckets, embed_dim))
-    lstm_model.add(tf.keras.layers.LSTM(rnn_state_size, activation=tf.nn.relu))
-    lstm_model.add(tf.keras.layers.Dense(1, activation=tf.nn.sigmoid))
-    lstm_model.compile("Adagrad", "binary_crossentropy", metrics=["accuracy"])
-    return lstm_model
-
-
-def get_keras_early_stopping(patience=10, monitor="val_acc"):
-    """Stops training if monitor value doesn't exceed the current max value after patience num of epochs"""
-    return tf.keras.callbacks.EarlyStopping(
-        monitor=monitor, patience=patience, verbose=1, restore_best_weights=True
-    )
-
-
-def map_pad_or_truncate(string, max_length=30, num_buckets=30000):
-    """Tokenize text, pad or truncate to get max_length, and hash tokens."""
-    ids = tf.keras.preprocessing.text.hashing_trick(
-        string, n=num_buckets, hash_function="md5"
-    )
-    return ids[:max_length] + [0] * (max_length - len(ids))
-
-
-def featurize_df_tokens(df):
-    return np.array(list(map(map_pad_or_truncate, df.text)))
-
-
-def preview_tfs(df, tfs):
-    transformed_examples = []
-    for f in tfs:
-        for i, row in df.sample(frac=1, random_state=2).iterrows():
-            transformed_or_none = f(row)
-            # If TF returned a transformed example, record it in dict and move to next TF.
-            if transformed_or_none is not None:
-                transformed_examples.append(
-                    OrderedDict(
-                        {
-                            "TF Name": f.name,
-                            "Original Text": row.text,
-                            "Transformed Text": transformed_or_none.text,
-                        }
-                    )
-                )
-                break
-    return pd.DataFrame(transformed_examples)
 
 
 def df_to_features(vectorizer, df, split):
@@ -1729,294 +1663,294 @@ def get_most_influential_point(influences, test_ids, removed_count = 100):
 
 
 '''-torch.mean(torch.sum(torch.nn.functional.log_softmax(y, dim=1) * onehot(t, 2), dim=1))'''
-def evaluate_influence_function_repetitive(args, training_dataset, Y_train_full, test_dataset, model, count, loss_func):
-    
-    train_ids = list(range(training_dataset.data.shape[0]))
-    
-    origin_training_dataset = models.MyDataset(training_dataset.data.clone(), training_dataset.labels.clone())    
-    
-    
-#     model = do_training(args, training_dataset)
-#     
-#     evaluate_model_test_dataset(test_dataset, model, args)
-    
-    
-    all_influence_points = []
-    
-    for i in range(count):
-        
-    
-        ptif.init_logging()
-        config = ptif.get_default_config()
-        train_DL = DataLoader(training_dataset, batch_size=args.bz)
-            
-        test_DL = DataLoader(test_dataset, batch_size=args.bz)
-        
-        
-        
-        config['test_sample_num'] = 0
-        
-        config['outdir'] = args.output_dir
-        
-        if args.GPU:
-            config['gpu'] = args.GPUID
-        else:
-            config['gpu'] = -1
-        
-        config['single_train'] = False
-        
-        config['loss_func'] = loss_func
-        
-#         influences = ptif.calc_img_wise_with_ids(config, model, train_DL, test_DL, test_ids)
-        
-        
-        influences = ptif.calc_img_wise_multi_with_ids(config, model, train_DL, test_DL, train_ids)
-        
-        print('influences::')
-    
-        
-    
-        most_influence_point, ordered_list, sorted_train_ids = get_most_influential_point(influences, train_ids)
-        
-#         torch.save(sorted_train_ids, )
-        print(sorted_train_ids[0:count])
-
-        all_influence_points.append(most_influence_point)
-
-        print('most influence point::', most_influence_point)
-        
-        print(all_influence_points)
-
-        train_ids = [id for id in train_ids if not id == most_influence_point]
-        
-        
-#         training_dataset.labels[most_influence_point] = Y_train_full[most_influence_point]
-        
-        update_training_data = origin_training_dataset.data[torch.tensor(train_ids)]
-         
-        update_training_labels = origin_training_dataset.labels[torch.tensor(train_ids)]
-         
-        training_dataset.data = update_training_data
-         
-        training_dataset.labels = update_training_labels
-        
-#         model = do_training(args, training_dataset)
-
-    print(all_influence_points)
-        
-    influential_training_data = origin_training_dataset.data[torch.tensor(all_influence_points)]
-    
-    influential_training_labels = Y_train_full[torch.tensor(all_influence_points)]
-    
-    
-    training_dataset.data = torch.cat([training_dataset.data, influential_training_data], dim = 0)
-         
-    training_dataset.labels = torch.cat([training_dataset.labels, influential_training_labels], dim = 0)
-
-    print('after cleaning by influence function::')
-    
-    model = do_training(args, training_dataset)
-    
-    evaluate_model_test_dataset(test_dataset, model, args)
-
-
-def evaluate_influence_transductive_repetitve(args, labeled_train_dataset, unlabeled_train_dataset, valid_dataset, dataset_test, model, count, loss_func, model_name, num_class):
-    
-    train_ids = list(range(unlabeled_train_dataset.data.shape[0]))
-    
-    ptif.init_logging()
-    config = ptif.get_default_config()
-    train_DL = DataLoader(labeled_train_dataset, batch_size=args.bz)
-        
-    valid_DL = DataLoader(valid_dataset, batch_size=args.bz)
-    
-    
-    
-    config['test_sample_num'] = 0
-    
-    config['outdir'] = args.output_dir
-    
-    if args.GPU:
-        config['gpu'] = args.GPUID
-    else:
-        config['gpu'] = -1
-    
-    config['single_train'] = False
-    
-    config['loss_func'] = loss_func
-    
-    influences = ptif.calc_img_wise_multi_with_ids_transductive(config, model, train_DL, valid_DL, train_ids, unlabeled_train_dataset)
-    
-    most_influence_point, ordered_list, sorted_train_ids = get_most_influential_point(influences, train_ids)
-    
-    return most_influence_point, ordered_list, sorted_train_ids
-
-
-def evaluate_influence_function_repetitive2(args, training_dataset, Y_train_full, valid_dataset, dataset_test, model, count, loss_func, model_name, num_class):
-    
-    train_ids = list(range(training_dataset.data.shape[0]))
-    
-    origin_training_dataset = models.MyDataset(training_dataset.data.clone(), training_dataset.labels.clone())    
-    
-    
-#     model = do_training(args, training_dataset)
-#     
-#     evaluate_model_test_dataset(test_dataset, model, args)
-    
-    
-    all_influence_points = []
-    
+# def evaluate_influence_function_repetitive(args, training_dataset, Y_train_full, test_dataset, model, count, loss_func):
+#
+#     train_ids = list(range(training_dataset.data.shape[0]))
+#
+#     origin_training_dataset = models.MyDataset(training_dataset.data.clone(), training_dataset.labels.clone())    
+#
+#
+# #     model = do_training(args, training_dataset)
+# #     
+# #     evaluate_model_test_dataset(test_dataset, model, args)
+#
+#
+#     all_influence_points = []
+#
 #     for i in range(count):
-        
-    
-    ptif.init_logging()
-    config = ptif.get_default_config()
-    train_DL = DataLoader(training_dataset, batch_size=args.bz)
-        
-    valid_DL = DataLoader(valid_dataset, batch_size=args.bz)
-    
-    
-    
-    config['test_sample_num'] = 0
-    
-    config['outdir'] = args.output_dir
-    
-    if args.GPU:
-        config['gpu'] = args.device
-    else:
-        config['gpu'] = None
-    
-    config['single_train'] = False
-    
-    config['loss_func'] = loss_func
-    
-#         influences = ptif.calc_img_wise_with_ids(config, model, train_DL, test_DL, test_ids)
-    
-    
-    influences = ptif.calc_img_wise_multi_with_ids(config, model, train_DL, valid_DL, train_ids, f1 = args.f1)
-    
-    print('influences::')
-
-    
-
-    most_influence_point, ordered_list, sorted_train_ids = get_most_influential_point(influences, train_ids)
-    
-    sorted_train_ids = sorted_train_ids.cpu()
-    
-#         torch.save(sorted_train_ids, )
-#     print(sorted_train_ids[0:count])
-
-    all_influence_points.append(most_influence_point)
-
-    print('most influence point::', most_influence_point)
-    
-    print(all_influence_points)
-
-    train_ids = [id for id in train_ids if not id == most_influence_point]
-    
-    
-#         training_dataset.labels[most_influence_point] = Y_train_full[most_influence_point]
-    
-#     update_training_data = origin_training_dataset.data[torch.tensor(train_ids)]
-#      
-#     update_training_labels = origin_training_dataset.labels[torch.tensor(train_ids)]
-#      
-#     training_dataset.data = update_training_data
-#      
-#     training_dataset.labels = update_training_labels
-#         
+#
+#
+#         ptif.init_logging()
+#         config = ptif.get_default_config()
+#         train_DL = DataLoader(training_dataset, batch_size=args.bz)
+#
+#         test_DL = DataLoader(test_dataset, batch_size=args.bz)
+#
+#
+#
+#         config['test_sample_num'] = 0
+#
+#         config['outdir'] = args.output_dir
+#
+#         if args.GPU:
+#             config['gpu'] = args.GPUID
+#         else:
+#             config['gpu'] = -1
+#
+#         config['single_train'] = False
+#
+#         config['loss_func'] = loss_func
+#
+# #         influences = ptif.calc_img_wise_with_ids(config, model, train_DL, test_DL, test_ids)
+#
+#
+#         influences = ptif.calc_img_wise_multi_with_ids(config, model, train_DL, test_DL, train_ids)
+#
+#         print('influences::')
+#
+#
+#
+#         most_influence_point, ordered_list, sorted_train_ids = get_most_influential_point(influences, train_ids)
+#
+# #         torch.save(sorted_train_ids, )
+#         print(sorted_train_ids[0:count])
+#
+#         all_influence_points.append(most_influence_point)
+#
+#         print('most influence point::', most_influence_point)
+#
+#         print(all_influence_points)
+#
+#         train_ids = [id for id in train_ids if not id == most_influence_point]
+#
+#
+# #         training_dataset.labels[most_influence_point] = Y_train_full[most_influence_point]
+#
+#         update_training_data = origin_training_dataset.data[torch.tensor(train_ids)]
+#
+#         update_training_labels = origin_training_dataset.labels[torch.tensor(train_ids)]
+#
+#         training_dataset.data = update_training_data
+#
+#         training_dataset.labels = update_training_labels
+#
 # #         model = do_training(args, training_dataset)
-# 
+#
 #     print(all_influence_points)
-#         
-#     influential_training_data = origin_training_dataset.data[sorted_train_ids[0:count]]
-#     
-#     influential_training_labels = Y_train_full[sorted_train_ids[0:count]]
-    
-#     sorted_train_ids = torch.randperm(Y_train_full.shape[0])[0:count]
-    
-#     r_weight = torch.ones(Y_train_full.shape[0], dtype = Y_train_full.dtype, device = Y_train_full.device)*noisy_weight
-#     
-#     r_weight[sorted_train_ids[0:count]] = 1
-#     
-# #     training_dataset.data = torch.cat([training_dataset.data, influential_training_data], dim = 0)
-#          
-#     training_dataset.labels[sorted_train_ids[0:count]] = Y_train_full[sorted_train_ids[0:count]]
-# 
+#
+#     influential_training_data = origin_training_dataset.data[torch.tensor(all_influence_points)]
+#
+#     influential_training_labels = Y_train_full[torch.tensor(all_influence_points)]
+#
+#
+#     training_dataset.data = torch.cat([training_dataset.data, influential_training_data], dim = 0)
+#
+#     training_dataset.labels = torch.cat([training_dataset.labels, influential_training_labels], dim = 0)
+#
 #     print('after cleaning by influence function::')
-#     
-#     training_dataset.data = training_dataset.data[~(training_dataset.labels == -1)]
-#     
-#     training_dataset.labels = training_dataset.labels[~(training_dataset.labels == -1)]
-#     
-#     model = do_training_general(args, training_dataset, model_name, num_class, r_weight = r_weight)
-#     
-#     evaluate_model_test_dataset(dataset_test, model, args)
-    
-    return influences, ordered_list, sorted_train_ids
-
-
-
-def evaluate_influence_function_repetitive_incremental(args, batch_size, regularization_term, is_GPU, device, full_out_dir, training_dataset, valid_dataset, model, loss_func, optimizer, learning_rate = 0.0002, r_weight = None):
-    
-    train_ids = list(range(training_dataset.data.shape[0]))
-    
-    origin_training_dataset = models.MyDataset(training_dataset.data.clone(), training_dataset.labels.clone())    
-    
-    
+#
 #     model = do_training(args, training_dataset)
-#     
+#
 #     evaluate_model_test_dataset(test_dataset, model, args)
-    
-    
-    all_influence_points = []
-    
-#     for i in range(count):
-        
-    
-#     ptif.init_logging()
-    config = ptif.get_default_config()
-    train_DL = DataLoader(training_dataset, batch_size=batch_size*2, shuffle = True)
-        
-    valid_DL = DataLoader(valid_dataset, batch_size=batch_size*2, shuffle = True)
-    
-    
-    
-    config['test_sample_num'] = 0
-    
-    config['outdir'] = full_out_dir
-    
-    if is_GPU:
-        config['gpu'] = device
-    else:
-        config['gpu'] = None
-    
-    config['single_train'] = False
-    
-    config['loss_func'] = loss_func
-    
-    config['regularization_term'] = regularization_term
-#         influences = ptif.calc_img_wise_with_ids(config, model, train_DL, test_DL, test_ids)
-    
-    
-#     s_test_vec = ptif.calc_img_wise_multi_with_ids_incremental2(config, model, training_dataset, valid_dataset, train_ids, batch_size, f1 = False)
-    
-    # s_test_vec = ptif.calc_img_wise_multi_with_ids_incremental(config, model, train_DL, valid_DL, train_ids, f1 = False)
-    
-    curr_valid_r_weights = torch.ones(valid_dataset.data.shape[0], device = device)
-    
-    # curr_valid_r_weights = torch.ones(valid_dataset.data.shape[0], device = device)
-    
-    valid_grad,_,_ = compute_gradient(model, valid_dataset.data, valid_dataset.labels, torch.nn.CrossEntropyLoss(), curr_valid_r_weights, 0, optimizer, is_GPU, device, random_sampling = False, bz = batch_size, batch_ids = None)
-    
-    
-    curr_train_r_weights = r_weight# torch.ones(training_dataset.data.shape[0], device = device)
-    
-    s_test_vec = compute_conjugate_grad3(model, valid_grad, training_dataset.data, training_dataset.labels, loss_func, optimizer, curr_train_r_weights, 0, is_GPU, device, exp_res = None, learning_rate = args.derived_lr, random_sampling = True, bz = args.derived_bz, running_iter = args.derived_epochs, regularization_rate=args.derived_l2)
-    
-    print('influences::')
 
-    return s_test_vec
+
+# def evaluate_influence_transductive_repetitve(args, labeled_train_dataset, unlabeled_train_dataset, valid_dataset, dataset_test, model, count, loss_func, model_name, num_class):
+#
+#     train_ids = list(range(unlabeled_train_dataset.data.shape[0]))
+#
+#     ptif.init_logging()
+#     config = ptif.get_default_config()
+#     train_DL = DataLoader(labeled_train_dataset, batch_size=args.bz)
+#
+#     valid_DL = DataLoader(valid_dataset, batch_size=args.bz)
+#
+#
+#
+#     config['test_sample_num'] = 0
+#
+#     config['outdir'] = args.output_dir
+#
+#     if args.GPU:
+#         config['gpu'] = args.GPUID
+#     else:
+#         config['gpu'] = -1
+#
+#     config['single_train'] = False
+#
+#     config['loss_func'] = loss_func
+#
+#     influences = ptif.calc_img_wise_multi_with_ids_transductive(config, model, train_DL, valid_DL, train_ids, unlabeled_train_dataset)
+#
+#     most_influence_point, ordered_list, sorted_train_ids = get_most_influential_point(influences, train_ids)
+#
+#     return most_influence_point, ordered_list, sorted_train_ids
+
+
+# def evaluate_influence_function_repetitive2(args, training_dataset, Y_train_full, valid_dataset, dataset_test, model, count, loss_func, model_name, num_class):
+#
+#     train_ids = list(range(training_dataset.data.shape[0]))
+#
+#     origin_training_dataset = models.MyDataset(training_dataset.data.clone(), training_dataset.labels.clone())    
+#
+#
+# #     model = do_training(args, training_dataset)
+# #     
+# #     evaluate_model_test_dataset(test_dataset, model, args)
+#
+#
+#     all_influence_points = []
+#
+# #     for i in range(count):
+#
+#
+#     ptif.init_logging()
+#     config = ptif.get_default_config()
+#     train_DL = DataLoader(training_dataset, batch_size=args.bz)
+#
+#     valid_DL = DataLoader(valid_dataset, batch_size=args.bz)
+#
+#
+#
+#     config['test_sample_num'] = 0
+#
+#     config['outdir'] = args.output_dir
+#
+#     if args.GPU:
+#         config['gpu'] = args.device
+#     else:
+#         config['gpu'] = None
+#
+#     config['single_train'] = False
+#
+#     config['loss_func'] = loss_func
+#
+# #         influences = ptif.calc_img_wise_with_ids(config, model, train_DL, test_DL, test_ids)
+#
+#
+#     influences = ptif.calc_img_wise_multi_with_ids(config, model, train_DL, valid_DL, train_ids, f1 = args.f1)
+#
+#     print('influences::')
+#
+#
+#
+#     most_influence_point, ordered_list, sorted_train_ids = get_most_influential_point(influences, train_ids)
+#
+#     sorted_train_ids = sorted_train_ids.cpu()
+#
+# #         torch.save(sorted_train_ids, )
+# #     print(sorted_train_ids[0:count])
+#
+#     all_influence_points.append(most_influence_point)
+#
+#     print('most influence point::', most_influence_point)
+#
+#     print(all_influence_points)
+#
+#     train_ids = [id for id in train_ids if not id == most_influence_point]
+#
+#
+# #         training_dataset.labels[most_influence_point] = Y_train_full[most_influence_point]
+#
+# #     update_training_data = origin_training_dataset.data[torch.tensor(train_ids)]
+# #      
+# #     update_training_labels = origin_training_dataset.labels[torch.tensor(train_ids)]
+# #      
+# #     training_dataset.data = update_training_data
+# #      
+# #     training_dataset.labels = update_training_labels
+# #         
+# # #         model = do_training(args, training_dataset)
+# # 
+# #     print(all_influence_points)
+# #         
+# #     influential_training_data = origin_training_dataset.data[sorted_train_ids[0:count]]
+# #     
+# #     influential_training_labels = Y_train_full[sorted_train_ids[0:count]]
+#
+# #     sorted_train_ids = torch.randperm(Y_train_full.shape[0])[0:count]
+#
+# #     r_weight = torch.ones(Y_train_full.shape[0], dtype = Y_train_full.dtype, device = Y_train_full.device)*noisy_weight
+# #     
+# #     r_weight[sorted_train_ids[0:count]] = 1
+# #     
+# # #     training_dataset.data = torch.cat([training_dataset.data, influential_training_data], dim = 0)
+# #          
+# #     training_dataset.labels[sorted_train_ids[0:count]] = Y_train_full[sorted_train_ids[0:count]]
+# # 
+# #     print('after cleaning by influence function::')
+# #     
+# #     training_dataset.data = training_dataset.data[~(training_dataset.labels == -1)]
+# #     
+# #     training_dataset.labels = training_dataset.labels[~(training_dataset.labels == -1)]
+# #     
+# #     model = do_training_general(args, training_dataset, model_name, num_class, r_weight = r_weight)
+# #     
+# #     evaluate_model_test_dataset(dataset_test, model, args)
+#
+#     return influences, ordered_list, sorted_train_ids
+
+
+
+# def evaluate_influence_function_repetitive_incremental(args, batch_size, regularization_term, is_GPU, device, full_out_dir, training_dataset, valid_dataset, model, loss_func, optimizer, learning_rate = 0.0002, r_weight = None):
+#
+#     train_ids = list(range(training_dataset.data.shape[0]))
+#
+#     origin_training_dataset = models.MyDataset(training_dataset.data.clone(), training_dataset.labels.clone())    
+#
+#
+# #     model = do_training(args, training_dataset)
+# #     
+# #     evaluate_model_test_dataset(test_dataset, model, args)
+#
+#
+#     all_influence_points = []
+#
+# #     for i in range(count):
+#
+#
+# #     ptif.init_logging()
+#     config = ptif.get_default_config()
+#     train_DL = DataLoader(training_dataset, batch_size=batch_size*2, shuffle = True)
+#
+#     valid_DL = DataLoader(valid_dataset, batch_size=batch_size*2, shuffle = True)
+#
+#
+#
+#     config['test_sample_num'] = 0
+#
+#     config['outdir'] = full_out_dir
+#
+#     if is_GPU:
+#         config['gpu'] = device
+#     else:
+#         config['gpu'] = None
+#
+#     config['single_train'] = False
+#
+#     config['loss_func'] = loss_func
+#
+#     config['regularization_term'] = regularization_term
+# #         influences = ptif.calc_img_wise_with_ids(config, model, train_DL, test_DL, test_ids)
+#
+#
+# #     s_test_vec = ptif.calc_img_wise_multi_with_ids_incremental2(config, model, training_dataset, valid_dataset, train_ids, batch_size, f1 = False)
+#
+#     # s_test_vec = ptif.calc_img_wise_multi_with_ids_incremental(config, model, train_DL, valid_DL, train_ids, f1 = False)
+#
+#     curr_valid_r_weights = torch.ones(valid_dataset.data.shape[0], device = device)
+#
+#     # curr_valid_r_weights = torch.ones(valid_dataset.data.shape[0], device = device)
+#
+#     valid_grad,_,_ = compute_gradient(model, valid_dataset.data, valid_dataset.labels, torch.nn.CrossEntropyLoss(), curr_valid_r_weights, 0, optimizer, is_GPU, device, random_sampling = False, bz = batch_size, batch_ids = None)
+#
+#
+#     curr_train_r_weights = r_weight# torch.ones(training_dataset.data.shape[0], device = device)
+#
+#     s_test_vec = compute_conjugate_grad3(model, valid_grad, training_dataset.data, training_dataset.labels, loss_func, optimizer, curr_train_r_weights, 0, is_GPU, device, exp_res = None, learning_rate = args.derived_lr, random_sampling = True, bz = args.derived_bz, running_iter = args.derived_epochs, regularization_rate=args.derived_l2)
+#
+#     print('influences::')
+#
+#     return s_test_vec
 
 
 def evaluate_influence_function_repetitive_incremental2(args, batch_size, regularization_term, is_GPU, device, full_out_dir, training_dataset, valid_dataset, model, loss_func, optimizer, learning_rate = 0.0002, r_weight = None):
@@ -2037,27 +1971,27 @@ def evaluate_influence_function_repetitive_incremental2(args, batch_size, regula
         
     
 #     ptif.init_logging()
-    config = ptif.get_default_config()
+    # config = ptif.get_default_config()
     train_DL = DataLoader(training_dataset, batch_size=batch_size*2, shuffle = True)
         
     valid_DL = DataLoader(valid_dataset, batch_size=batch_size*2, shuffle = True)
     
     
     
-    config['test_sample_num'] = 0
-    
-    config['outdir'] = full_out_dir
-    
-    if is_GPU:
-        config['gpu'] = device
-    else:
-        config['gpu'] = None
-    
-    config['single_train'] = False
-    
-    config['loss_func'] = loss_func
-    
-    config['regularization_term'] = regularization_term
+    # config['test_sample_num'] = 0
+    #
+    # config['outdir'] = full_out_dir
+    #
+    # if is_GPU:
+    #     config['gpu'] = device
+    # else:
+    #     config['gpu'] = None
+    #
+    # config['single_train'] = False
+    #
+    # config['loss_func'] = loss_func
+    #
+    # config['regularization_term'] = regularization_term
 #         influences = ptif.calc_img_wise_with_ids(config, model, train_DL, test_DL, test_ids)
     
     
@@ -2103,138 +2037,138 @@ def evaluate_influence_function_repetitive_incremental2(args, batch_size, regula
 #     return influences, ordered_list, sorted_train_ids, s_test_vec
 
     
-def evaluate_influence_function_repetitive_del(args, training_DL, val_DL, test_DL, training_dataset, valid_dataset, dataset_test, model, count, loss_func, model_name, num_class):
-    
-    if training_DL is None:
-        train_ids = list(range(training_dataset.data.shape[0]))
-    else:
-        train_ids = list(range(training_DL.dataset.lenth))
-    
-    if training_DL is None:
-        origin_training_dataset = models.MyDataset(training_dataset.data.clone(), training_dataset.labels.clone())    
-    
-    
-#     model = do_training(args, training_dataset)
-#     
-#     evaluate_model_test_dataset(test_dataset, model, args)
-    
-    
-    all_influence_points = []
-    
-#     for i in range(count):
-        
-    
-    ptif.init_logging()
-    config = ptif.get_default_config()
-    
-    if training_DL is None:
-        train_DL = DataLoader(training_dataset, batch_size=args.bz)
-            
-        valid_DL = DataLoader(valid_dataset, batch_size=args.bz)
-    
-    else:
-        train_DL = training_DL
-        
-        valid_DL = val_DL
-    
-    config['test_sample_num'] = 0
-    
-    config['outdir'] = args.output_dir
-    
-    if args.GPU:
-        config['gpu'] = args.GPUID
-    else:
-        config['gpu'] = -1
-    
-    config['single_train'] = False
-    
-    config['loss_func'] = loss_func
-    
-#         influences = ptif.calc_img_wise_with_ids(config, model, train_DL, test_DL, test_ids)
-    print('valid data::', valid_DL.dataset)
-    
-    influences = ptif.calc_img_wise_multi_with_ids(config, model, train_DL, valid_DL, train_ids, f1 = args.f1)
-     
-    print('influences::')
- 
-     
- 
-    most_influence_point, ordered_list, sorted_train_ids = get_most_influential_point(influences, train_ids)
-     
-    sorted_train_ids = sorted_train_ids.cpu()
-     
-#         torch.save(sorted_train_ids, )
-    print(sorted_train_ids[0:count])
- 
-    all_influence_points.append(most_influence_point)
- 
-    print('most influence point::', most_influence_point)
-     
-    print(all_influence_points)
- 
-    train_ids = [id for id in train_ids if not id == most_influence_point]
-    
-#     sorted_train_ids = torch.randperm(len(train_ids))
-    
-    
-    
-    
-#         training_dataset.labels[most_influence_point] = Y_train_full[most_influence_point]
-    
-#     update_training_data = origin_training_dataset.data[torch.tensor(train_ids)]
-#      
-#     update_training_labels = origin_training_dataset.labels[torch.tensor(train_ids)]
-#      
-#     training_dataset.data = update_training_data
-#      
-#     training_dataset.labels = update_training_labels
-#         
-# #         model = do_training(args, training_dataset)
-# 
+# def evaluate_influence_function_repetitive_del(args, training_DL, val_DL, test_DL, training_dataset, valid_dataset, dataset_test, model, count, loss_func, model_name, num_class):
+#
+#     if training_DL is None:
+#         train_ids = list(range(training_dataset.data.shape[0]))
+#     else:
+#         train_ids = list(range(training_DL.dataset.lenth))
+#
+#     if training_DL is None:
+#         origin_training_dataset = models.MyDataset(training_dataset.data.clone(), training_dataset.labels.clone())    
+#
+#
+# #     model = do_training(args, training_dataset)
+# #     
+# #     evaluate_model_test_dataset(test_dataset, model, args)
+#
+#
+#     all_influence_points = []
+#
+# #     for i in range(count):
+#
+#
+#     ptif.init_logging()
+#     config = ptif.get_default_config()
+#
+#     if training_DL is None:
+#         train_DL = DataLoader(training_dataset, batch_size=args.bz)
+#
+#         valid_DL = DataLoader(valid_dataset, batch_size=args.bz)
+#
+#     else:
+#         train_DL = training_DL
+#
+#         valid_DL = val_DL
+#
+#     config['test_sample_num'] = 0
+#
+#     config['outdir'] = args.output_dir
+#
+#     if args.GPU:
+#         config['gpu'] = args.GPUID
+#     else:
+#         config['gpu'] = -1
+#
+#     config['single_train'] = False
+#
+#     config['loss_func'] = loss_func
+#
+# #         influences = ptif.calc_img_wise_with_ids(config, model, train_DL, test_DL, test_ids)
+#     print('valid data::', valid_DL.dataset)
+#
+#     influences = ptif.calc_img_wise_multi_with_ids(config, model, train_DL, valid_DL, train_ids, f1 = args.f1)
+#
+#     print('influences::')
+#
+#
+#
+#     most_influence_point, ordered_list, sorted_train_ids = get_most_influential_point(influences, train_ids)
+#
+#     sorted_train_ids = sorted_train_ids.cpu()
+#
+# #         torch.save(sorted_train_ids, )
+#     print(sorted_train_ids[0:count])
+#
+#     all_influence_points.append(most_influence_point)
+#
+#     print('most influence point::', most_influence_point)
+#
 #     print(all_influence_points)
-#         
-#     influential_training_data = origin_training_dataset.data[sorted_train_ids[0:count]]
-#     
-#     influential_training_labels = Y_train_full[sorted_train_ids[0:count]]
-    
-#     sorted_train_ids = torch.randperm(Y_train_full.shape[0])[0:count]
-    
-#     r_weight = torch.ones(training_dataset.data.shape[0], dtype = training_dataset.data.dtype, device = training_dataset.data.device)
-#     
-#     r_weight[sorted_train_ids[0:count]] = 1
-    
-#     training_dataset.data = training_dataset.data[sorted_train_ids[count:]]
-#           
-#     training_dataset.labels = training_dataset.labels[sorted_train_ids[count:]] 
-
-    print('after cleaning by influence function::')
-    
-    if training_DL is None:
-    
-        model = do_training_general_hard(args, training_dataset, valid_dataset, dataset_test, model_name, num_class)
-        
-        if dataset_test is not None:
-            evaluate_model_test_dataset(dataset_test, model, args)
-        else:
-            evaluate_model_test_dataset(valid_dataset, model, args)
-    
-    else:
-        
-        train_DL.dataset.skipped_dataset = sorted_train_ids[0:count]
-        
-        model = do_training_general_hard_DL(args, train_DL, val_DL, model_name, num_class, skipped_ids = sorted_train_ids[0:count])
-        
-        
-        if test_DL is not None:
-            valid_model(model, test_DL, None, 'test', args.GPU, args.device, f1 = args.f1)
-        
+#
+#     train_ids = [id for id in train_ids if not id == most_influence_point]
+#
+# #     sorted_train_ids = torch.randperm(len(train_ids))
+#
+#
+#
+#
+# #         training_dataset.labels[most_influence_point] = Y_train_full[most_influence_point]
+#
+# #     update_training_data = origin_training_dataset.data[torch.tensor(train_ids)]
+# #      
+# #     update_training_labels = origin_training_dataset.labels[torch.tensor(train_ids)]
+# #      
+# #     training_dataset.data = update_training_data
+# #      
+# #     training_dataset.labels = update_training_labels
+# #         
+# # #         model = do_training(args, training_dataset)
+# # 
+# #     print(all_influence_points)
+# #         
+# #     influential_training_data = origin_training_dataset.data[sorted_train_ids[0:count]]
+# #     
+# #     influential_training_labels = Y_train_full[sorted_train_ids[0:count]]
+#
+# #     sorted_train_ids = torch.randperm(Y_train_full.shape[0])[0:count]
+#
+# #     r_weight = torch.ones(training_dataset.data.shape[0], dtype = training_dataset.data.dtype, device = training_dataset.data.device)
+# #     
+# #     r_weight[sorted_train_ids[0:count]] = 1
+#
+# #     training_dataset.data = training_dataset.data[sorted_train_ids[count:]]
+# #           
+# #     training_dataset.labels = training_dataset.labels[sorted_train_ids[count:]] 
+#
+#     print('after cleaning by influence function::')
+#
+#     if training_DL is None:
+#
+#         model = do_training_general_hard(args, training_dataset, valid_dataset, dataset_test, model_name, num_class)
+#
 #         if dataset_test is not None:
 #             evaluate_model_test_dataset(dataset_test, model, args)
 #         else:
 #             evaluate_model_test_dataset(valid_dataset, model, args)
-    
-    
-    return most_influence_point, ordered_list, sorted_train_ids
+#
+#     else:
+#
+#         train_DL.dataset.skipped_dataset = sorted_train_ids[0:count]
+#
+#         model = do_training_general_hard_DL(args, train_DL, val_DL, model_name, num_class, skipped_ids = sorted_train_ids[0:count])
+#
+#
+#         if test_DL is not None:
+#             valid_model(model, test_DL, None, 'test', args.GPU, args.device, f1 = args.f1)
+#
+# #         if dataset_test is not None:
+# #             evaluate_model_test_dataset(dataset_test, model, args)
+# #         else:
+# #             evaluate_model_test_dataset(valid_dataset, model, args)
+#
+#
+#     return most_influence_point, ordered_list, sorted_train_ids
 
 def convert_to_binary_classification_model(args, model, training_dataset):
     bin_model = models.Binary_Logistic_regression(model.fc1.in_features,bias=False)

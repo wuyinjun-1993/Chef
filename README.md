@@ -1,4 +1,4 @@
-# Chef
+# The implementation of the paper "CHEF: A Cheap and Fast Pipeline for Iteratively Cleaning Label Uncertainties" accepted by VLDB 2021. The technical report is available [here](https://arxiv.org/abs/2107.08588)
 
 Pre-process data (suppose the project director is '/path/to/dir'):
 

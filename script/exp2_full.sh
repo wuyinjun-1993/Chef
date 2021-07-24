@@ -39,7 +39,7 @@ duti_training_lr=200
 
 #clear_hist=$9
 
-total_iteration=3
+total_iteration=1
 
 #running_iteration=${10}
 
@@ -131,7 +131,7 @@ clear_hist_list=(true false false false true)
 default_strategy_list=(0 0 3 0 0)
 cmd
 
-python_file_list=(full_pipeline_suggest_labels full_pipeline_active_learning full_pipeline_active_learning_entropy full_pipeline full_pipeline_o2u)
+python_file_list=(full_pipeline_infl full_pipeline_active_learning full_pipeline_active_learning_entropy full_pipeline full_pipeline_o2u)
 multi_strategy_list=(true false false false false)
 suffix_list=(sl${source_file_suffix} ac${source_file_suffix} ac2${source_file_suffix} infl${source_file_suffix} o2u${source_file_suffix})
 clear_hist_list=(true false false false false)

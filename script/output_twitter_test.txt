@@ -1,0 +1,41 @@
+python3 gen_simulated_labels.py --dataset twitter --output_dir /home/wuyinjun/pg_data/twitter/
+default git ignore dir:: /home/wuyinjun/workspace/Chef/.gitignore
+Namespace(GPU=False, GPUID=None, GPU_measure=False, binary=False, bz=16, class=0, continue_labeling=False, dataset='twitter', del_ratio=0.001, derived_bz=1000, derived_epochs=1000, derived_l2=0, derived_lr=0.01, device=device(type='cpu'), did=0, dir=None, epochs=10, f1=False, hist_period=50, hist_size=2, incremental=False, init=15, inner_epoch_count=50, iter_count=None, jump=10, load_incremental=False, load_model=False, lr=0.1, model=None, no_probs=False, no_prov=False, noisy_ratio=0.1, norm=None, o2u_epochs=2, out_epoch_count=10, output_dir='/home/wuyinjun/pg_data/twitter/', period=20, regular_rate=1.0, removed_count=50, resolve_conflict=None, restart=False, same_y_diff=False, small_test=False, start=False, suffix='sl', tars=False, tlr=0.001, wd=0.001)
+11606 11606 11606 11606
+10446
+train shape:: torch.Size([11606, 768])
+is_tars::false
+run DUTI
+lr::0.005
+l2 decay:: 0.002
+epochs:: 400
+batch size:: 1000
+source file:: ./hyper_twitter_initial_zero0
+start influence-l
+no retina
+start neural model
+0 full_pipeline_infl true
+bash run_full_pipeline_suggest_label_repeat_all.sh 15  /home/wuyinjun/pg_data/twitter/ twitter 200 10 0.005 0.002 400 1000 true 0 false 2 0.001 0.5 full_pipeline_infl true sl_initial_zero0 0 ./hyper_twitter_initial_zero0 Logistic_regression false false
+source file:: ./hyper_twitter_initial_zero0
+restart or not:: --restart
+repeat times:: 0 20 1
+python3 full_pipeline_infl.py --derived_lr 0.001 --bz 1000 --epochs 400 --tlr 0.005 --norm loss --wd 0.002 --dataset twitter --model Logistic_regression  --removed_count 50 --output_dir /home/wuyinjun/pg_data/twitter/ --start --restart --hist_period 15 --regular_rate 0.5 --suffix sl_initial_zero0  --no_prov > /home/wuyinjun/pg_data/twitter//output_vary_remove_count_20_start_sl_initial_zero0_0.txt 2>&1
+iteration 0
+print remove count::
+20, 20, 0
+python3 full_pipeline_infl.py --derived_lr 0.001 --derived_epochs 50 --derived_bz 2000 --derived_l2 0 --bz 1000 --epochs 400 --tlr 0.005 --norm loss --wd 0.002 --dataset twitter --model Logistic_regression  --removed_count 20 --output_dir /home/wuyinjun/pg_data/twitter/  --hist_period 15 --resolve_conflict 1 --regular_rate 0.5 --suffix sl_initial_zero0  --no_prov > /home/wuyinjun/pg_data/twitter//output_resolve_conflict_1_remove_count_20_0_sl_initial_zero0_0.txt 2>&1
+python3 full_pipeline_infl.py --derived_lr 0.001 --derived_epochs 50 --derived_bz 2000 --derived_l2 0  --bz 1000 --epochs 400 --tlr 0.005 --norm loss --wd 0.002 --dataset twitter --model Logistic_regression  --removed_count 20 --output_dir /home/wuyinjun/pg_data/twitter/ --hist_period 15 --resolve_conflict 3 --regular_rate 0.5 --suffix sl_initial_zero0  --no_prov > /home/wuyinjun/pg_data/twitter//output_resolve_conflict_3_remove_count_20_0_sl_initial_zero0_0.txt 2>&1
+python3 full_pipeline_infl.py --derived_lr 0.001 --derived_epochs 50 --derived_bz 2000 --derived_l2 0 --bz 1000 --epochs 400 --tlr 0.005 --norm loss --wd 0.002 --dataset twitter --model Logistic_regression  --removed_count 20 --output_dir /home/wuyinjun/pg_data/twitter/  --hist_period 15 --resolve_conflict 0 --regular_rate 0.5 --continue_labeling --suffix sl_initial_zero0   --no_prov > /home/wuyinjun/pg_data/twitter//output_resolve_conflict_0_remove_count_20_0_sl_initial_zero0_0.txt 2>&1
+repeat times:: 1 10 2
+python3 full_pipeline_infl.py --derived_lr 0.001 --bz 1000 --epochs 400 --tlr 0.005 --norm loss --wd 0.002 --dataset twitter --model Logistic_regression  --removed_count 50 --output_dir /home/wuyinjun/pg_data/twitter/ --start  --hist_period 15 --regular_rate 0.5 --suffix sl_initial_zero0  --no_prov > /home/wuyinjun/pg_data/twitter//output_vary_remove_count_10_start_sl_initial_zero0_0.txt 2>&1
+iteration 0
+print remove count::
+10, 20, 0
+python3 full_pipeline_infl.py --derived_lr 0.001 --derived_epochs 50 --derived_bz 2000 --derived_l2 0 --bz 1000 --epochs 400 --tlr 0.005 --norm loss --wd 0.002 --dataset twitter --model Logistic_regression  --removed_count 10 --output_dir /home/wuyinjun/pg_data/twitter/  --hist_period 15 --resolve_conflict 1 --regular_rate 0.5 --suffix sl_initial_zero0  --no_prov > /home/wuyinjun/pg_data/twitter//output_resolve_conflict_1_remove_count_10_0_sl_initial_zero0_0.txt 2>&1
+python3 full_pipeline_infl.py --derived_lr 0.001 --derived_epochs 50 --derived_bz 2000 --derived_l2 0  --bz 1000 --epochs 400 --tlr 0.005 --norm loss --wd 0.002 --dataset twitter --model Logistic_regression  --removed_count 10 --output_dir /home/wuyinjun/pg_data/twitter/ --hist_period 15 --resolve_conflict 3 --regular_rate 0.5 --suffix sl_initial_zero0  --no_prov > /home/wuyinjun/pg_data/twitter//output_resolve_conflict_3_remove_count_10_0_sl_initial_zero0_0.txt 2>&1
+python3 full_pipeline_infl.py --derived_lr 0.001 --derived_epochs 50 --derived_bz 2000 --derived_l2 0 --bz 1000 --epochs 400 --tlr 0.005 --norm loss --wd 0.002 --dataset twitter --model Logistic_regression  --removed_count 10 --output_dir /home/wuyinjun/pg_data/twitter/  --hist_period 15 --resolve_conflict 0 --regular_rate 0.5 --continue_labeling --suffix sl_initial_zero0   --no_prov > /home/wuyinjun/pg_data/twitter//output_resolve_conflict_0_remove_count_10_0_sl_initial_zero0_0.txt 2>&1
+iteration 1
+print remove count::
+10, 20, 10
+python3 full_pipeline_infl.py --derived_lr 0.001 --derived_epochs 50 --derived_bz 2000 --derived_l2 0 --bz 1000 --epochs 400 --tlr 0.005 --norm loss --wd 0.002 --dataset twitter --model Logistic_regression  --removed_count 10 --output_dir /home/wuyinjun/pg_data/twitter/  --hist_period 15 --resolve_conflict 1 --regular_rate 0.5 --suffix sl_initial_zero0  --no_prov > /home/wuyinjun/pg_data/twitter//output_resolve_conflict_1_remove_count_10_1_sl_initial_zero0_0.txt 2>&1
+python3 full_pipeline_infl.py --derived_lr 0.001 --derived_epochs 50 --derived_bz 2000 --derived_l2 0  --bz 1000 --epochs 400 --tlr 0.005 --norm loss --wd 0.002 --dataset twitter --model Logistic_regression  --removed_count 10 --output_dir /home/wuyinjun/pg_data/twitter/ --hist_period 15 --resolve_conflict 3 --regular_rate 0.5 --suffix sl_initial_zero0  --no_prov > /home/wuyinjun/pg_data/twitter//output_resolve_conflict_3_remove_count_10_1_sl_initial_zero0_0.txt 2>&1
