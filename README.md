@@ -1,4 +1,12 @@
-# The implementation of *CHEF* from the paper "CHEF: A Cheap and Fast Pipeline for Iteratively Cleaning Label Uncertainties" accepted by VLDB 2021. The technical report is available [here](https://arxiv.org/abs/2107.08588)
+# CHEF: A Cheap and Fast Pipeline for Iteratively Cleaning Label Uncertainties 
+The implementation of the system *CHEF* from the following paper:
+
+> [CHEF: A Cheap and Fast Pipeline for Iteratively Cleaning Label Uncertainties](https://arxiv.org/abs/2107.08588)\
+Yinjun Wu, James Weimer, Susan B. Davidson\
+47th International Conference on Very Large Data Bases ([VLDB](https://https://vldb.org/2021/)), 2021\
+_arXiv:2107.08588_
+
+"CHEF: A Cheap and Fast Pipeline for Iteratively Cleaning Label Uncertainties" accepted by VLDB 2021. The technical report is available [here](https://arxiv.org/abs/2107.08588)
 
 
 ## Getting Started
