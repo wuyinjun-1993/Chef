@@ -1,10 +1,10 @@
 # The implementation of the paper "CHEF: A Cheap and Fast Pipeline for Iteratively Cleaning Label Uncertainties" accepted by VLDB 2021. The technical report is available [here](https://arxiv.org/abs/2107.08588)
 
 
-##Getting Started
+## Getting Started
 This project is implemented with Python3. To start using this project, it is essential to run the following steps
 
-###Installing the prerequisites
+### Installing the prerequisites
 To install the required python packages, we can first clone a local copy of this project
 ```
 git clone https://github.com/thuwuyinjun/Chef.git
