@@ -4,7 +4,7 @@ Created on Apr 23, 2021
 '''
 
 # import pickle
-import dill as pickle
+# import dill as pickle
 
 import csv
 import json
@@ -12,9 +12,9 @@ from argparse import ArgumentParser
 import os,sys
 import pandas as pd
 import numpy as np
-import gensim
-from gensim.models import Word2Vec
-import gensim.downloader as api
+# import gensim
+# from gensim.models import Word2Vec
+# import gensim.downloader as api
 import re
 import torch
 from snorkel.labeling.model import LabelModel
@@ -25,7 +25,7 @@ from scipy import stats
 import re
 
 import os
-import pickle
+# import pickle
 import numpy as np
 import torch
 import pandas as pd
@@ -46,7 +46,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/interactive_weak_supervision')
 # sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/utils')
 
-from gensim.test.utils import datapath
+# from gensim.test.utils import datapath
 
 
 

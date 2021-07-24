@@ -6,8 +6,6 @@ Yinjun Wu, James Weimer, Susan B. Davidson\
 47th International Conference on Very Large Data Bases ([VLDB](https://https://vldb.org/2021/)), 2021\
 _arXiv:2107.08588_
 
-"CHEF: A Cheap and Fast Pipeline for Iteratively Cleaning Label Uncertainties" accepted by VLDB 2021. The technical report is available [here](https://arxiv.org/abs/2107.08588)
-
 
 ## Getting Started
 This project is implemented with Python3. To start using this project, it is essential to run the following steps
@@ -46,3 +44,18 @@ To compare infl against other baseline methods, run the following command on twi
 cd script/
 
 bash exp2_full.sh /path/to/dir/data/twitter/ twitter true 1 Logistic_regression '' false
+
+## citation
+Please cite our paper if you use code from this repo:
+
+```
+@article{wu2021chef,
+  title={CHEF: A Cheap and Fast Pipeline for Iteratively Cleaning Label Uncertainties},
+  author={Wu, Yinjun and Weimer, James and Davidson, Susan B.},
+  journal={Proceedings of the VLDB Endowment},
+  volume={14},
+  number={11},
+  year={2021},
+  publisher={VLDB Endowment}
+}
+```
