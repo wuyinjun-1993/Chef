@@ -51,8 +51,9 @@ $3=learning rate for model training (SGD), e.g., 0.005,\
 $4=L2 regularization rate for model training (SGD), e.g., 0.002,\
 $5=dataset name, e.g., twitter,\
 $6=model name, e.g., Logistic_regression,\
-$7=data directory to store the generated results from the pre-processing step, e.g., '/output/dir/' above,\
+$7=data directory to store the generated results from the pre-processing step, e.g., '/output/dir/' used above,\
 $8=regularization coefficient for regularizing the training samples with probabilistic labels, e.g., 0.8, which is the value of &lambda; in the paper.
+$9=tag for the names of the output files (e.g., output model parameters), which could be any string.
 
 For example, to train a model on the Twitter dataset, the above commands could be instantiated as follows:
 
@@ -65,9 +66,25 @@ python3 full_pipeline_infl.py --bz 1000 --epochs 400 --tlr 0.005 --norm loss --w
 
 
 
-#### Evaluating the performance of *INFL*:
+#### Evaluating *INFL*:
 
-To run *INFL* for identifying the most **influential** training samples for cleaning, we can run the following command:
+After the initial model is constructed, we can then use *INFl* to identify the Top-b **influential** training samples for cleaning, in which b is the number of training samples to be cleaned each time. To achieve this, we can then run the following command:
+
+
+```
+cd /path/to/dir/iterative_detect/
+python3 full_pipeline_infl.py --derived_lr $1 --derived_epochs $2 --derived_bz $3 --bz $4 --epochs $5 --tlr $6 --wd $7 --dataset $8 --model $9  --removed_count $10 --output_dir $11  --resolve_conflict $12 --regular_rate $13 --suffix $14  --no_prov
+```
+
+$1,$2=The learning rate and the number of epochs used in the conjugate gradient method for deriving the matrix-vector product <img src="http://www.sciweavers.org/tex2img.php?eq=%20%5Cnabla%20F%28w%2Cz%29&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0" align="center" border="0" alt=" \nabla F(w,z)" width="72" height="18" />
+
+
+
+```
+cd /path/to/dir/iterative_detect/
+python3 full_pipeline_infl.py --derived_lr 0.001 --derived_epochs 50 --derived_bz 2000 --derived_l2 0 --bz 1000 --epochs 400 --tlr 0.005 --norm loss --wd 0.002 --dataset twitter --model Logistic_regression  --removed_count 20 --output_dir /home/wuyinjun/pg_data/twitter/  --hist_period 15 --resolve_conflict 1 --regular_rate 0.5 --suffix sl_initial_zero0  --no_prov
+```
+
 
 ```
 cd iterative_detect/
