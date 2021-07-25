@@ -52,7 +52,7 @@ $4=L2 regularization rate for model training (SGD), e.g., 0.002,\
 $5=dataset name, e.g., twitter,\
 $6=model name, e.g., Logistic_regression,\
 $7=data directory to store the generated results from the pre-processing step, e.g., '/output/dir/' used above,\
-$8=regularization coefficient for regularizing the training samples with probabilistic labels, e.g., 0.8, which is the value of &lambda; in the paper.
+$8=regularization coefficient for regularizing the training samples with probabilistic labels, e.g., 0.8, which is the value of &lambda; in the paper.\
 $9=tag for the names of the output files (e.g., output model parameters), which could be any string.
 
 For example, to train a model on the Twitter dataset, the above commands could be instantiated as follows:
@@ -76,29 +76,58 @@ cd /path/to/dir/iterative_detect/
 python3 full_pipeline_infl.py --derived_lr $1 --derived_epochs $2 --derived_bz $3 --bz $4 --epochs $5 --tlr $6 --wd $7 --dataset $8 --model $9  --removed_count $10 --output_dir $11  --resolve_conflict $12 --regular_rate $13 --suffix $14  --no_prov
 ```
 
-$1,$2=The learning rate and the number of epochs used in the conjugate gradient method for deriving the matrix-vector product <img src="http://www.sciweavers.org/tex2img.php?eq=%5Cnabla_%7B%5Ctextbf%7Bw%7D%7D%20F%28%5Ctextbf%7Bw%7D%2C%5Cmathcal%7BZ%7D_%7B%5Ctext%7Bval%7D%7D%29%5E%5Ctop%20%5Ctextbf%7BH%7D%5E%7B-1%7D%28%5Ctextbf%7Bw%7D%29&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0" align="center" border="0" alt="\nabla_{\textbf{w}} F(\textbf{w},\mathcal{Z}_{\text{val}})^\top \textbf{H}^{-1}(\textbf{w})" width="179" height="21" />
+$1,$2,$3=The learning rate, the number of epochs and the mini-batch size used in the conjugate gradient method for deriving the matrix-vector product <img src="http://www.sciweavers.org/tex2img.php?eq=%5Cnabla_%7B%5Ctextbf%7Bw%7D%7D%20F%28%5Ctextbf%7Bw%7D%2C%5Cmathcal%7BZ%7D_%7B%5Ctext%7Bval%7D%7D%29%5E%5Ctop%20%5Ctextbf%7BH%7D%5E%7B-1%7D%28%5Ctextbf%7Bw%7D%29&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0" align="center" border="0" alt="\nabla_{\textbf{w}} F(\textbf{w},\mathcal{Z}_{\text{val}})^\top \textbf{H}^{-1}(\textbf{w})" width="179" height="21" /> in Equation (6)\
+$4,$5,$6,$7=mini-batch size, the number of epochs, the learning rates and the L2 regularization rate for SGD iterations\
+$8=dataset name, e.g., twitter\
+$9=model name, e.g., Logistic_regression\
+$10=the number of training samples to be cleaned, i.e., the value of **b**, e.g., 10\
+$11=the directory of the generated results from the previous step on constructing the initial model, e.g., '/output/dir/'\
+$12=which cleaning strategy if *INFL* is used, 0=strategy one, 3=strategy two, 1=strategy three\
+$13=regularization coefficient for regularizing the training samples with probabilistic labels, e.g., 0.8, which is the value of &lambda; in the paper\
+$14=tag for the names of the output files (e.g., output model parameters), which could be any string
 
 
+For example, we can run the following command on the Twitter dataset:
 
 ```
 cd /path/to/dir/iterative_detect/
-python3 full_pipeline_infl.py --derived_lr 0.001 --derived_epochs 50 --derived_bz 2000 --derived_l2 0 --bz 1000 --epochs 400 --tlr 0.005 --norm loss --wd 0.002 --dataset twitter --model Logistic_regression  --removed_count 20 --output_dir /home/wuyinjun/pg_data/twitter/  --hist_period 15 --resolve_conflict 1 --regular_rate 0.5 --suffix sl_initial_zero0  --no_prov
+python3 full_pipeline_infl.py --derived_lr 0.001 --derived_epochs 50 --derived_bz 2000 --bz 1000 --epochs 400 --tlr 0.005 --wd 0.002 --dataset twitter --model Logistic_regression  --removed_count 20 --output_dir /output/dir/  --resolve_conflict 1 --regular_rate 0.5 --suffix sl_initial_zero0  --no_prov
+```
+
+If we want to continuously clean the training dataset, we can add one flag, '--continue_labeling', in the command above, i.e.:
+```
+python3 full_pipeline_infl.py --derived_lr 0.001 --derived_epochs 50 --derived_bz 2000 --bz 1000 --epochs 400 --tlr 0.005 --wd 0.002 --dataset twitter --model Logistic_regression  --removed_count 20 --output_dir /output/dir/  --resolve_conflict 1 --regular_rate 0.5 --suffix sl_initial_zero0  --no_prov --continue_labeling
+```
+
+which can start from the updated models and the updated training dataset next time when this command is executed. 
+
+
+
+We also prepared a script to run infl and compare it against other baseline approaches after the pre-processing step. We can run the following command to achieve this:
+
+```
+cd /path/to/dir/script/
+
+bash exp_infl.sh $1 $2 $3 $4 $5 $6 $7
+```
+
+$1=output directory used in the pre-processing step, e.g., '/output/dir/'\
+$2=dataset name, e.g., twitter \
+$3=whether GPU is used, true for yes and false for no \
+$4=The GPU ID used for experiments \
+$5=model name, e.g., Logistic_regression \
+$6=suffix of the file names for storing the hyper-parameters used for the experiments. The full name of the files storing the hyper-parameters will be 'hyper_$2$6' \
+$7=whether to compare against the baseline 'TARS'
+
+
+
+```
+cd /path/to/dir/script/
+
+bash exp_infl.sh /output/dir/ twitter true 1 Logistic_regression ''
 ```
 
 
-```
-cd iterative_detect/
-python3 full_pipeline_infl.py --derived_lr 0.001 --bz 1000 --epochs 400 --tlr 0.005 --norm loss --wd 0.002 --dataset twitter --model Logistic_regression  --removed_count 50 --output_dir /home/wuyinjun/pg_data/twitter/ --start --restart --hist_period 15 --regular_rate 0.5 --suffix sl_initial_zero0  --no_prov
-```
-
-For example, 
-
-
-To compare infl against other baseline methods, run the following command on twitter dataset:
-
-cd script/
-
-bash exp2_full.sh /path/to/dir/data/twitter/ twitter true 1 Logistic_regression '' false
 
 #### Evaluating the performance of *Increm-INFL*
 
