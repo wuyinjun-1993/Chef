@@ -45,13 +45,13 @@ cd /path/to/dir/iterative_detect/
 python3 full_pipeline_infl.py --bz $1 --epochs $2 --tlr $3 --wd $4 --dataset $5 --model $6  --output_dir $7 --start --restart --regular_rate $8 --suffix $9  --no_prov
 ```
 in which, 
-$1=mini-batch size for model training (SGD), e.g., 1000
-$2=number of epochs for model training (SGD), e.g., 400
-$3=learning rate for model training (SGD), e.g., 0.005
-$4=L2 regularization rate for model training (SGD), e.g., 0.002
-$5=dataset name, e.g., twitter
-$6=model name, e.g., Logistic_regression
-$7=data directory, e.g., ''
+$1=mini-batch size for model training (SGD), e.g., 1000,\
+$2=number of epochs for model training (SGD), e.g., 400,\
+$3=learning rate for model training (SGD), e.g., 0.005,\
+$4=L2 regularization rate for model training (SGD), e.g., 0.002,\
+$5=dataset name, e.g., twitter,\
+$6=model name, e.g., Logistic_regression,\
+$7=data directory to store the generated results from the pre-processing step, e.g., '/output/dir/' above,\
 $8=regularization coefficient for regularizing the training samples with probabilistic labels, e.g., 0.8, which is the value of &lambda; in the paper.
 
 For example, to train a model on the Twitter dataset, the above commands could be instantiated as follows:
