@@ -76,10 +76,7 @@ cd /path/to/dir/iterative_detect/
 python3 full_pipeline_infl.py --derived_lr $1 --derived_epochs $2 --derived_bz $3 --bz $4 --epochs $5 --tlr $6 --wd $7 --dataset $8 --model $9  --removed_count $10 --output_dir $11  --resolve_conflict $12 --regular_rate $13 --suffix $14  --no_prov
 ```
 
-$1,$2,$3=The learning rate, the number of epochs and the mini-batch size used in the conjugate gradient method for deriving the matrix-vector product <img src="http://www.sciweavers.org/tex2img.php?eq=%5Cnabla_%7B%5Ctextbf%7Bw%7D%7D%20F%28%5Ctextbf%7Bw%7D%2C%5Cmathcal%7BZ%7D_%7B%5Ctext%7Bval%7D%7D%29%5E%5Ctop%20%5Ctextbf%7BH%7D%5E%7B-1%7D%28%5Ctextbf%7Bw%7D%29&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0" align="center" border="0" alt="\nabla_{\textbf{w}} F(\textbf{w},\mathcal{Z}_{\text{val}})^\top \textbf{H}^{-1}(\textbf{w})" width="179" height="21" /> 
-
-
-<img src="https://render.githubusercontent.com/render/math?math=\nabla_{\textbf{w}} F(\textbf{w},\mathcal{Z}_{\text{val}})^\top \textbf{H}^{-1}(\textbf{w})">
+$1,$2,$3=The learning rate, the number of epochs and the mini-batch size used in the conjugate gradient method for deriving the matrix-vector product <img src="https://render.githubusercontent.com/render/math?math=\nabla_{\textbf{w}} F(\textbf{w},\mathcal{Z}_{\text{val}})^\top \textbf{H}^{-1}(\textbf{w})"> in Equation (6)
 
 
 $4,$5,$6,$7=mini-batch size, the number of epochs, the learning rates and the L2 regularization rate for SGD iterations\
@@ -108,7 +105,7 @@ which can start from the updated models and the updated training dataset next ti
 
 
 
-We also prepared a script to run infl and compare it against other baseline approaches after the pre-processing step. We can run the following command to achieve this:
+We also prepared a script to run INFL and compare it against other baseline approaches after the pre-processing step. We can run the following command to achieve this:
 
 ```
 cd /path/to/dir/script/
@@ -135,9 +132,35 @@ bash exp_infl.sh /output/dir/ twitter true 1 Logistic_regression _initial_zero0 
 
 
 
-#### Evaluating *Increm-INFL*
+#### Evaluating *Increm-INFL* and *DeltaGrad-L*
 
-#### Evaluating *DeltaGrad-L*
+To run *Increm-INFL* and *DeltaGrad-L*, we can use the following command:
+```
+cd /path/to/dir/iterative_detect/
+python3 full_pipeline_infl.py --derived_lr $1 --derived_epochs $2 --derived_bz $3 --bz $4 --epochs $5 --tlr $6 --wd $7 --dataset $8 --model $9  --removed_count $10 --output_dir $11  --resolve_conflict $12 --regular_rate $13 --suffix $14  --no_prov --incremental --hist_period $15 --continue_labeling
+```
+
+in which the flag '--incremental' is used for indicating the use of the *Increm-INFL* and *DeltaGrad-L*. During the first time when the above command is executed, we need to cache some provenance information, which happens every $15 SGD epochs. For example, $15=20.
+
+
+We also prepared a script to run Increm-INFL and DeltaGrad-L and compared them against the case where they are not used, for which we can run the following command:
+```
+cd /path/to/dir/script/
+bash exp_compare_incre.sh $1 $2 $3 $4 $5
+```
+
+$1=output directory used in the pre-processing step, e.g., '/output/dir/'\
+$2=dataset name, e.g., twitter \
+$3=whether GPU is used, true for yes and false for no \
+$4=The GPU ID used for experiments \
+$5=suffix of the file names for storing the hyper-parameters used for the experiments. The full name of the files storing the hyper-parameters will be "hyper_$2$5" \
+
+
+
+
+
+
+
 
 
 ## citation

@@ -58,7 +58,7 @@ tag=${5}
 is_tars=false
 
 if [ "$#" -ge 5 ]; then
-    is_tars=${7}
+    is_tars=${6}
 fi
 
 cd ../iterative_detect
