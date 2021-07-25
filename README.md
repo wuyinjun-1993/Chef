@@ -76,7 +76,7 @@ cd /path/to/dir/iterative_detect/
 python3 full_pipeline_infl.py --derived_lr $1 --derived_epochs $2 --derived_bz $3 --bz $4 --epochs $5 --tlr $6 --wd $7 --dataset $8 --model $9  --removed_count $10 --output_dir $11  --resolve_conflict $12 --regular_rate $13 --suffix $14  --no_prov
 ```
 
-$1,$2=The learning rate and the number of epochs used in the conjugate gradient method for deriving the matrix-vector product <img src="http://www.sciweavers.org/tex2img.php?eq=%20%5Cnabla%20F%28w%2Cz%29&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0" align="center" border="0" alt=" \nabla F(w,z)" width="72" height="18" />
+$1,$2=The learning rate and the number of epochs used in the conjugate gradient method for deriving the matrix-vector product <img src="http://www.sciweavers.org/tex2img.php?eq=%5Cnabla_%7B%5Ctextbf%7Bw%7D%7D%20F%28%5Ctextbf%7Bw%7D%2C%5Cmathcal%7BZ%7D_%7B%5Ctext%7Bval%7D%7D%29%5E%5Ctop%20%5Ctextbf%7BH%7D%5E%7B-1%7D%28%5Ctextbf%7Bw%7D%29&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0" align="center" border="0" alt="\nabla_{\textbf{w}} F(\textbf{w},\mathcal{Z}_{\text{val}})^\top \textbf{H}^{-1}(\textbf{w})" width="179" height="21" />
 
 
 
