@@ -116,22 +116,23 @@ $2=dataset name, e.g., twitter \
 $3=whether GPU is used, true for yes and false for no \
 $4=The GPU ID used for experiments \
 $5=model name, e.g., Logistic_regression \
-$6=suffix of the file names for storing the hyper-parameters used for the experiments. The full name of the files storing the hyper-parameters will be 'hyper_$2$6' \
+$6=suffix of the file names for storing the hyper-parameters used for the experiments. The full name of the files storing the hyper-parameters will be "hyper_$2$6" \
 $7=whether to compare against the baseline 'TARS'
 
 
+For example, the above command could be instantiated as follows for the Twitter dataset:
 
 ```
 cd /path/to/dir/script/
 
-bash exp_infl.sh /output/dir/ twitter true 1 Logistic_regression ''
+bash exp_infl.sh /output/dir/ twitter true 1 Logistic_regression _initial_zero0 false
 ```
 
 
 
-#### Evaluating the performance of *Increm-INFL*
+#### Evaluating *Increm-INFL*
 
-#### Evaluating the performance of *DeltaGrad-L*
+#### Evaluating *DeltaGrad-L*
 
 
 ## citation
