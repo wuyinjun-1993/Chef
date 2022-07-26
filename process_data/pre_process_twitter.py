@@ -143,8 +143,8 @@ def derive_prob_labels(corpus, ground_truth_label, corpus_test, git_ignore_dir):
 
     LFs,lf_descriptions = generate_ngram_LFs(corpus,'unigram',mindf = 0)
     
-    svd = TruncatedSVD(n_components=min(50, LFs.shape[0] - 1), n_iter=20, random_state=42)
-    LFfeatures = svd.fit_transform(LFs.T).astype(np.float32)
+    svd = TruncatedSVD(n_components=min(50, LFs.shape[0] - 1), n_iter=20, random_state=42, algorithm='arpack')
+    LFfeatures = svd.fit_transform(LFs.asfptype().T).astype(np.float32)
     
     
     positive_sentiment_words = ['amazing', 'great','awesome', 'thank']
@@ -336,11 +336,11 @@ def read_twitter_csv(file_name, output_dir, training_count_with_gt_ratio = 0):
     
     print('valid data frame::')
     
-    print_text(valid_df)
+    # print_text(valid_df)
     
     print('test data frame::')
     
-    print_text(test_df)
+    # print_text(test_df)
     
     
     torch.save(torch.tensor(valid_ids), os.path.join(output_dir, 'valid_ids'))
@@ -525,11 +525,11 @@ if __name__ == '__main__':
     parser.add_argument('--output_dir', type = str, default = default_output_dir, help="output directory")
     
     parser.add_argument('--input_data_dir', type = str, default = None, help="output directory")
-    
+        
+    args = parser.parse_args()
+
     if args.input_data_dir is None:
         args.input_data_dir = args.output_dir
-    
-    args = parser.parse_args()
     
     # clean_sample_ids = torch.load(os.path.join(args.output_dir, 'clean_sample_ids'))
     

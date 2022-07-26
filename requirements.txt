@@ -21,3 +21,4 @@ torchtext
 transformers
 sentencepiece
 importlib_metadata
+huggingface-hub
