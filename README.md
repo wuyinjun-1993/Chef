@@ -29,7 +29,7 @@ This step aims at 1) transforming the plain-text data into the embedding represe
 
 ```
 cd /path/to/dir/process_data/
-python pre_process_twitter --input_data_dir /path/to/dir/data/twitter/ --output_dir /output/dir/
+python pre_process_twitter.py --input_data_dir /path/to/dir/data/twitter/ --output_dir /output/dir/
 ```
 
 The '/output/dir/' is a folder for storing the generated the training set, the validation set and the test set, which are then used for the experiments. The default value of '/output/dir/' is '/path/to/dir/.gitignore/crowdsourced_dataset/twitter/' for the Twitter dataset, which can be changed for any directory name.
