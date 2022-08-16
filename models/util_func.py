@@ -28,7 +28,7 @@ try:
     from models.logistic_regression import *
     # from iterative_detect.utils_iters import *
 #     from utils.utils import *
-    # from real_examples.utils_real import *
+    # from models.utils_real import *
 except ImportError:
 #     from utils import *
     # from utils_real import *

@@ -55,7 +55,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/
 
 
 try:
-    from real_examples.utils_real import *
+    from models.utils_real import *
     from utils.utils import *
     from process_data.pre_process_fact import *
     from interactive_weak_supervision.iws_utils import *

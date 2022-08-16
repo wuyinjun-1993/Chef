@@ -28,7 +28,7 @@
 #
 # try:
 #     from utils.utils import *
-#     from real_examples.utils_real import *
+#     from models.utils_real import *
 #     from models.util_func import *
 #     from Reweight_examples.utils_reweight import *
 # except ImportError:
@@ -1587,7 +1587,7 @@ import os, glob
 
 
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/real_examples')
+# sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/real_examples')
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/Reweight_examples')
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/models')
@@ -1598,7 +1598,7 @@ from utils_iters import *
 
 try:
     from utils.utils import *
-    from real_examples.utils_real import *
+    from models.utils_real import *
     from models.util_func import *
     from Reweight_examples.utils_reweight import *
 except ImportError:

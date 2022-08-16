@@ -36,7 +36,7 @@ import re
 
 try:
     from utils.utils import *
-    from real_examples.utils_real import *
+    from models.utils_real import *
     from train import *
 
 except ImportError:

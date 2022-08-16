@@ -26,7 +26,7 @@ from utils_iters import *
 
 try:
     from utils.utils import *
-    from real_examples.utils_real import *
+    from models.utils_real import *
     from models.util_func import *
     from Reweight_examples.utils_reweight import *
 except ImportError:

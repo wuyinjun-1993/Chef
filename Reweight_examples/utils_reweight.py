@@ -44,7 +44,7 @@ import models
 try:
     from utils.utils import *
     from models.util_func import *
-    from real_examples.utils_real import *
+    from models.utils_real import *
 except ImportError:
     from utils import *
     from util_func import *

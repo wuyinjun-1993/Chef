@@ -23,7 +23,7 @@
 # try:
 #     from models.util_func import *
 #     from utils.utils import *
-#     from real_examples.utils_real import *
+#     from models.utils_real import *
 #     from models.util_func import *
 #     from Reweight_examples.utils_reweight import *
 #     from Reweight_examples.generate_prob_labels import *
@@ -6693,7 +6693,7 @@ from sklearn import metrics
 try:
     from models.util_func import *
     from utils.utils import *
-    from real_examples.utils_real import *
+    from models.utils_real import *
     from models.util_func import *
     from Reweight_examples.utils_reweight import *
     from Reweight_examples.generate_prob_labels import *
